@@ -1,7 +1,6 @@
 
 // TODO: Get searchbar working
 //jshint esversion: 6
-<<<<<<< HEAD
 
 function getSearchResults(userQuery) {
   let settings = {
