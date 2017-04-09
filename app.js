@@ -61,6 +61,7 @@ function renderResultsList(previewArray){
     previewHtml += '</li></a>';
   });
   $('#search-results').html(previewHtml);
+}
 
 function getPreviewData(searchResult) {
   let recipeObj = searchResult.recipe;
