@@ -1,0 +1,80 @@
+{
+  "Recipes": [
+    {
+      "name": "ChickenFajitas",
+      "image": "https://webknox.com/recipeImages/520451-556x370.jpg",
+      "link": "https://spoonacular.com/recipes/chickenfajitas-520451",
+      "kvtable": "<table><tr><td>Cost</td><td>$2.58 per serving</td></tr><tr><td>Calories</td><td>Cost per Serving: $2.58</td></tr><tr><td>Protein</td><td>31g Protein</td></tr><tr><td>Fat</td><td>9g Total Fat</td></tr><tr><td>Carbs</td><td>7g Carbs</td></tr></table>"
+    },
+    {
+      "name": "Chickety China the Chinese Chicken",
+      "image": "https://webknox.com/recipeImages/145742-556x370.jpg",
+      "link": "https://spoonacular.com/recipes/chickety-china-the-chinese-chicken-145742",
+      "kvtable": "<table><tr><td>Cost</td><td>$1.29 per serving</td></tr><tr><td>Calories</td><td>Cost per Serving: $1.29</td></tr><tr><td>Protein</td><td>21g Protein</td></tr><tr><td>Fat</td><td>17g Total Fat</td></tr><tr><td>Carbs</td><td>33g Carbs</td></tr></table>"
+    },
+    {
+      "name": "Cashew Chicken / Kaju Chicken",
+      "image": "https://webknox.com/recipeImages/602887-556x370.jpg",
+      "link": "https://spoonacular.com/recipes/cashew-chicken-kaju-chicken-602887",
+      "kvtable": "<table><tr><td>Cost</td><td>$1.84 per serving</td></tr><tr><td>Calories</td><td>Cost per Serving: $1.80</td></tr><tr><td>Protein</td><td>17g Protein</td></tr><tr><td>Fat</td><td>22g Total Fat</td></tr><tr><td>Carbs</td><td>21g Carbs</td></tr></table>"
+    },
+    {
+      "name": "Chicken Caesar Chicken Tenders",
+      "image": "https://webknox.com/recipeImages/493600-556x370.jpg",
+      "link": "https://spoonacular.com/recipes/chicken-caesar-chicken-tenders-493600",
+      "kvtable": "<table><tr><td>Cost</td><td>$5.35 per serving</td></tr><tr><td>Calories</td><td>Cost per Serving: $5.35</td></tr><tr><td>Protein</td><td>15g Protein</td></tr><tr><td>Fat</td><td>11g Total Fat</td></tr><tr><td>Carbs</td><td>7g Carbs</td></tr></table>"
+    },
+    {
+      "name": "Chicken Chicken Curry",
+      "image": "https://webknox.com/recipeImages/472214-556x370.jpg",
+      "link": "https://spoonacular.com/recipes/chicken-chicken-curry-472214",
+      "kvtable": "<table><tr><td>Cost</td><td>$2.25 per serving</td></tr><tr><td>Calories</td><td>Cost per Serving: $2.36</td></tr><tr><td>Protein</td><td>37g Protein</td></tr><tr><td>Fat</td><td>14g Total Fat</td></tr><tr><td>Carbs</td><td>7g Carbs</td></tr></table>"
+    }
+  ],
+  "Grocery Products": [
+    {
+      "name": "Betty Crocker Chicken Helper - Parmesan Crusted Chicken",
+      "image": "https://spoonacular.com/productImages/185030-312x231.jpg",
+      "link": "https://spoonacular.com/products/betty-crocker-chicken-helper-parmesan-crusted-chicken-185030",
+      "kvtable": "<table><tr><td>Calories</td><td>140 Calories</td></tr><tr><td>Protein</td><td>5g Protein</td></tr><tr><td>Fat</td><td>1g Total Fat</td></tr><tr><td>Carbs</td><td>27g Carbs</td></tr></table>"
+    },
+    {
+      "name": "Betty Crocker Chicken Helper - Creamy Chicken & Noodle",
+      "image": "https://spoonacular.com/productImages/208247-312x231.jpg",
+      "link": "https://spoonacular.com/products/betty-crocker-chicken-helper-creamy-chicken-noodle-208247",
+      "kvtable": "<table><tr><td>Calories</td><td>100 Calories</td></tr><tr><td>Protein</td><td>3g Protein</td></tr><tr><td>Fat</td><td>0.5g Total Fat</td></tr><tr><td>Carbs</td><td>20g Carbs</td></tr></table>"
+    },
+    {
+      "name": "Betty Crocker Chicken Helper - Crispy Ranch Chicken",
+      "image": "https://spoonacular.com/productImages/183356-312x231.jpg",
+      "link": "https://spoonacular.com/products/betty-crocker-chicken-helper-crispy-ranch-chicken-183356",
+      "kvtable": "<table><tr><td>Calories</td><td>110 Calories</td></tr><tr><td>Protein</td><td>2g Protein</td></tr><tr><td>Fat</td><td>0.5g Total Fat</td></tr><tr><td>Carbs</td><td>23g Carbs</td></tr></table>"
+    },
+    {
+      "name": "Betty Crocker Chicken Helper - Bold Cajun Chicken",
+      "image": "https://spoonacular.com/productImages/208251-312x231.jpg",
+      "link": "https://spoonacular.com/products/betty-crocker-chicken-helper-bold-cajun-chicken-208251",
+      "kvtable": "<table><tr><td>Calories</td><td>120 Calories</td></tr><tr><td>Protein</td><td>3g Protein</td></tr><tr><td>Fat</td><td>0.5g Total Fat</td></tr><tr><td>Carbs</td><td>27g Carbs</td></tr></table>"
+    },
+    {
+      "name": "Betty Crocker Chicken Helper - Chicken Fried Rice",
+      "image": "https://spoonacular.com/productImages/184364-312x231.jpg",
+      "link": "https://spoonacular.com/products/betty-crocker-chicken-helper-chicken-fried-rice-184364",
+      "kvtable": "<table><tr><td>Calories</td><td>110 Calories</td></tr><tr><td>Protein</td><td>3g Protein</td></tr><tr><td>Fat</td><td>0.0g Total Fat</td></tr><tr><td>Carbs</td><td>24g Carbs</td></tr></table>"
+    }
+  ],
+  "Articles": [
+    {
+      "name": "Chicken and Poultry",
+      "image": "https://spoonacular.com/application/frontend/images/academy/chicken-wings.jpg",
+      "link": "https://spoonacular.com/academy/chicken-and-poultry",
+      "kvtable": "<table></table>"
+    },
+    {
+      "name": "Meat Shredders for Pork, Chicken, or Beef",
+      "image": "https://spoonacular.com/application/frontend/images/articles/meat-shredder-in-action.jpg",
+      "link": "https://spoonacular.com/articles/meat-shredder",
+      "kvtable": "<table></table>"
+    }
+  ]
+}
