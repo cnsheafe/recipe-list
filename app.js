@@ -5,7 +5,10 @@ function initAppState() {
   return {
     resultList: [],
     currentView: 'search',
-    previousHtml: ''
+    previousHtml: '',
+    myRecipes: [],//list of recipe objs
+    loggedIn: false,
+    accessKey: ''
   };
 }
 
@@ -122,19 +125,32 @@ function renderRecipeDetails(simpleRecipeObj, state) {
   $('main').html(recipeInfoHtml);
 }
 
+function addToMyRecipes(simpleRecipeObj, state) {
+  state.push(simpleRecipeObj);
+}
 
+function getMyRecipesFromDropbox(dropbox, state) {
+  let filePath = window.filesDownloadArg('App/spoon-n-drop/nikuman.jpg');
+  dropbox.filesDownload(filepath);
+}
+
+function uploadMyRecipesToDropbox(dropbox, state) {
+
+}
 $(function main() {
   let appState = initAppState();
   let dbx = new window.Dropbox();
   dbx.setClientId('myj4y8uy5mlsg9s');
   dbx.setAccessToken(dbx.getAccessToken());
+
+
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
     let query = $(this).find('#search-bar').val();
 
     let xhrPromise = getSearchResults(query);
     xhrPromise.done(function (data) {
-      console.log(data);
+      // console.log(data);
       makeResultsList(data,appState);
       renderResultsList(appState);
     });
@@ -150,7 +166,13 @@ $(function main() {
   });
   $('#login').on('click', function() {
     let redirectUrl = dbx.getAuthenticationUrl('https://cnsheafe.github.io/spoon-n-drop');
-    console.log(redirectUrl);
     window.location.replace(redirectUrl);
+    appState.loggedIn = true;
+  });
+
+  $('#my-recipes').on('click', function() {
+    if(appState.loggedIn) {
+      getMyRecipesFromDropbox(dbx,appState);
+    }
   });
 });
