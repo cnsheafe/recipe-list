@@ -11,6 +11,9 @@
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous" defer>
   </script>
+  <script
+    src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js" defer>
+  </script>
   <script src="app.js" defer></script>
   <title>Recipe-prototype</title>
 </head>
@@ -21,14 +24,15 @@
 
 <body>
   <!-- QUESTION: Use a nav or an aside? -->
-  <nav id="side-bar">
+  <aside id="side-bar">
     <!-- QUESTION: Use a ul or a menu?-->
     <ul>
+      <li id='login'>Login</li>
       <li>Search</li>
       <li>Create</li>
       <li>My Recipes</li>
     </ul>
-  </nav>
+  </aside>
 
   <main>
     <form id="search-form">
