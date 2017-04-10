@@ -1,5 +1,4 @@
 
-// TODO: Get searchbar working
 //jshint esversion: 6
 
 function initAppState() {
@@ -122,8 +121,13 @@ function renderRecipeDetails(simpleRecipeObj, state) {
   recipeInfoHtml += '</ol>';
   $('main').html(recipeInfoHtml);
 }
+
+
 $(function main() {
   let appState = initAppState();
+  let dbx = new window.Dropbox();
+  dbx.setClientId('myj4y8uy5mlsg9s');
+  dbx.setAccessToken(dbx.getAccessToken());
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
     let query = $(this).find('#search-bar').val();
@@ -143,5 +147,10 @@ $(function main() {
     xhrPromise.done(function (data) {
       renderRecipeDetails(simplifyRecipeDetails(data),appState);
     });
+  });
+  $('#login').on('click', function() {
+    let redirectUrl = dbx.getAuthenticationUrl('https://cnsheafe.github.io/spoon-n-drop');
+    console.log(redirectUrl);
+    window.location.replace(redirectUrl);
   });
 });
