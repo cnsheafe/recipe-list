@@ -1,6 +1,7 @@
 
 //jshint esversion: 6
-
+const CLIENT_ID = 'myj4y8uy5mlsg9s';
+const MASHAPE_KEY = 'AyBmxPBKYUmshcuDOEgra2staJv9p1Tm8cgjsnsk5j9j5dONbK';
 function initAppState() {
   return {
     resultList: [],
@@ -8,7 +9,7 @@ function initAppState() {
     previousHtml: '',
     myRecipes: [],//list of recipe objs
     loggedIn: false,
-    accessKey: ''
+    accessToken: ''
   };
 }
 
@@ -129,20 +130,57 @@ function addToMyRecipes(simpleRecipeObj, state) {
   state.push(simpleRecipeObj);
 }
 
-function getMyRecipesFromDropbox(dropbox, state) {
-  let filePath = window.filesDownloadArg('App/spoon-n-drop/nikuman.jpg');
-  dropbox.filesDownload(filepath);
+function redirectToOAuth(){
+  let url = 'https://www.dropbox.com/oauth2/authorize?'+
+  'response_type=token&'+
+  'client_id='+CLIENT_ID+'&'+
+  'redirect_uri=http://localhost';
+  window.location.replace(url);
+}
+
+function downloadRecipes(state) {
+  let ajaxSettings = {
+    url: 'https://content.dropboxapi.com/2/files/download',
+    method: 'POST',
+    dataType: 'json',
+    // contentType: 'application/json',
+    // data: JSON.stringify({arg:{path: "nikuman.png"}}),
+      //reject_cors_preflight: true,
+    headers: {
+      Authorization: 'Bearer '+state.accessToken,
+      'Dropbox-API-Arg': JSON.stringify({path: '/questions.json'})
+    }
+  };
+  return $.ajax(ajaxSettings);
 }
 
 function uploadMyRecipesToDropbox(dropbox, state) {
 
 }
+
+function getFolderContents(state) {
+  let settings = {
+    url: "https://api.dropboxapi.com/2/files/list_folder",
+    method: 'POST',
+    dataType: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify({path: ""}),
+    headers: {
+      Authorization: 'Bearer '+state.accessToken
+    }
+  };
+  return $.ajax(settings);
+}
+
 $(function main() {
   let appState = initAppState();
-  let dbx = new window.Dropbox();
-  dbx.setClientId('myj4y8uy5mlsg9s');
-  dbx.setAccessToken(dbx.getAccessToken());
+  //let dbx = new window.Dropbox();
+  let redirectResponse = window.location.href.split('#')[1];
 
+  if(typeof redirectResponse != 'undefined'){
+    appState.accessToken = redirectResponse.split('&')[0].split('=')[1];
+    appState.loggedIn = true;
+  }
 
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
@@ -150,7 +188,6 @@ $(function main() {
 
     let xhrPromise = getSearchResults(query);
     xhrPromise.done(function (data) {
-      // console.log(data);
       makeResultsList(data,appState);
       renderResultsList(appState);
     });
@@ -164,15 +201,27 @@ $(function main() {
       renderRecipeDetails(simplifyRecipeDetails(data),appState);
     });
   });
+
   $('#login').on('click', function() {
-    let redirectUrl = dbx.getAuthenticationUrl('https://cnsheafe.github.io/spoon-n-drop');
-    window.location.replace(redirectUrl);
-    appState.loggedIn = true;
+    if(!appState.loggedIn) {redirectToOAuth();}
   });
 
   $('#my-recipes').on('click', function() {
     if(appState.loggedIn) {
-      getMyRecipesFromDropbox(dbx,appState);
+      console.log('sending!');
+      let xhr = downloadRecipes(appState);
+      xhr.then(
+        function success(data, status, jqxhr) {
+          console.log(jqxhr.responseText);
+          console.log(status);
+          console.log(data);
+        },
+        function error(jqxhr,status, errorThrown) {
+          console.log(jqxhr.responseText);
+          console.log(status);
+          console.log(errorThrown);
+        }
+      );
     }
   });
 });
