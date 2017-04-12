@@ -2,12 +2,13 @@
 //jshint esversion: 6
 const CLIENT_ID = 'myj4y8uy5mlsg9s';
 const MASHAPE_KEY = 'AyBmxPBKYUmshcuDOEgra2staJv9p1Tm8cgjsnsk5j9j5dONbK';
+const REDIRECT_URI = 'http://localhost/spoon-n-drop';
 function initAppState() {
   return {
     resultList: [],
     currentView: 'search',
     previousHtml: '',
-    myRecipes: [],//list of recipe objs
+    myRecipes: {},//list of recipe objs
     loggedIn: false,
     accessToken: ''
   };
@@ -21,7 +22,7 @@ function getSearchResults(userQuery) {
     },
     dataType: 'json',
     headers: {
-      'X-Mashape-Key': 'AyBmxPBKYUmshcuDOEgra2staJv9p1Tm8cgjsnsk5j9j5dONbK',
+      'X-Mashape-Key': MASHAPE_KEY,
       Accept: 'application/json'
     }
   };
@@ -40,7 +41,7 @@ function getSearchResultsByIngredient(myIngredients, numResults=5) {
     },
     dataType: 'json',
     headers: {
-      'X-Mashape-Key': 'AyBmxPBKYUmshcuDOEgra2staJv9p1Tm8cgjsnsk5j9j5dONbK',
+      'X-Mashape-Key': MASHAPE_KEY,
       Accept: 'application/json'
     }
   };
@@ -82,7 +83,7 @@ function getRecipeDetails(id) {
     },
     dataType: 'json',
     headers: {
-      'X-Mashape-Key': 'AyBmxPBKYUmshcuDOEgra2staJv9p1Tm8cgjsnsk5j9j5dONbK',
+      'X-Mashape-Key': MASHAPE_KEY,
       Accept: 'application/json'
     }
   };
@@ -134,43 +135,25 @@ function redirectToOAuth(){
   let url = 'https://www.dropbox.com/oauth2/authorize?'+
   'response_type=token&'+
   'client_id='+CLIENT_ID+'&'+
-  'redirect_uri=http://localhost';
+  'redirect_uri='+REDIRECT_URI;
   window.location.replace(url);
 }
 
-function downloadRecipes(state) {
+/*GET and param urls used to avoid CORS pre-flight*/
+function getMyRecipes(state) {
   let ajaxSettings = {
     url: 'https://content.dropboxapi.com/2/files/download',
-    method: 'POST',
+    method: 'GET',
     dataType: 'json',
-    // contentType: 'application/json',
-    // data: JSON.stringify({arg:{path: "nikuman.png"}}),
-      //reject_cors_preflight: true,
-    headers: {
-      Authorization: 'Bearer '+state.accessToken,
-      'Dropbox-API-Arg': JSON.stringify({path: '/questions.json'})
+    data: {
+      authorization: 'Bearer '+ state.accessToken,
+      arg: JSON.stringify({path: '/questions.json'}),
+      reject_cors_preflight: true
     }
   };
   return $.ajax(ajaxSettings);
 }
 
-function uploadMyRecipesToDropbox(dropbox, state) {
-
-}
-
-function getFolderContents(state) {
-  let settings = {
-    url: "https://api.dropboxapi.com/2/files/list_folder",
-    method: 'POST',
-    dataType: 'json',
-    contentType: 'application/json',
-    data: JSON.stringify({path: ""}),
-    headers: {
-      Authorization: 'Bearer '+state.accessToken
-    }
-  };
-  return $.ajax(settings);
-}
 
 $(function main() {
   let appState = initAppState();
@@ -207,20 +190,16 @@ $(function main() {
 
   $('#my-recipes').on('click', function() {
     if(appState.loggedIn) {
-      console.log('sending!');
-      let xhr = downloadRecipes(appState);
+      let xhr = getMyRecipes(appState);
       xhr.then(
-        function success(data, status, jqxhr) {
-          console.log(jqxhr.responseText);
-          console.log(status);
-          console.log(data);
+        function success(data) {
+          appState.myRecipes = data;
         },
-        function error(jqxhr,status, errorThrown) {
+        function error(jqxhr) {
           console.log(jqxhr.responseText);
-          console.log(status);
-          console.log(errorThrown);
         }
       );
     }
   });
+
 });
