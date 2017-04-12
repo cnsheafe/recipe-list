@@ -174,7 +174,6 @@ function getFolderContents(state) {
 
 $(function main() {
   let appState = initAppState();
-  //let dbx = new window.Dropbox();
   let redirectResponse = window.location.href.split('#')[1];
 
   if(typeof redirectResponse != 'undefined'){
