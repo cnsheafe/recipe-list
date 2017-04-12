@@ -3,6 +3,7 @@
 const CLIENT_ID = 'myj4y8uy5mlsg9s';
 const MASHAPE_KEY = 'AyBmxPBKYUmshcuDOEgra2staJv9p1Tm8cgjsnsk5j9j5dONbK';
 const REDIRECT_URI = 'http://localhost/spoon-n-drop';
+const MYRECIPES_PATH = '/my-recipes.json';
 function initAppState() {
   return {
     resultList: [],
@@ -147,7 +148,7 @@ function getMyRecipes(state) {
     dataType: 'json',
     data: {
       authorization: 'Bearer '+ state.accessToken,
-      arg: JSON.stringify({path: '/questions.json'}),
+      arg: JSON.stringify({path: '/my-recipes.json'}),
       reject_cors_preflight: true
     }
   };
