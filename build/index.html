@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../src/styles/main.css">
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous" defer>
+  </script>
+  <script src="../src/scripts/app.js" defer></script>
+  <title>Recipe-prototype</title>
+</head>
+
+<header>
+  <h1>Recipe App</h1>
+</header>
+
+<body>
+  <aside id="side-bar">
+    <ul>
+      <li id='login'>Login</li>
+      <li id="search-button">Search</li>
+      <li>Create</li>
+      <li id="my-recipes">My Recipes</li>
+    </ul>
+  </aside>
+
+  <main>
+    <form id="search-form">
+      <label for="search-bar">
+        <input type="text" id="search-bar">
+        <input type="submit">
+      </label>
+    </form>
+    <ul id="search-results">
+    <!-- Jquery will generated listed items. Each list item will have data attribute "recipeId" attached. -->
+    </ul>
+    <ul id="my-recipe-list" class="hide">
+      <h1>My Recipes</h1>
+    </ul>
+
+    <div id="create-recipe" class="hide">
+
+    </div>
+  </main>
+</body>
+
+</html>
