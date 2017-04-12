@@ -1,5 +1,6 @@
 
 //jshint esversion: 6
+
 const CLIENT_ID = 'myj4y8uy5mlsg9s';
 const MASHAPE_KEY = 'AyBmxPBKYUmshcuDOEgra2staJv9p1Tm8cgjsnsk5j9j5dONbK';
 const REDIRECT_URI = 'http://localhost/spoon-n-drop';
@@ -174,13 +175,7 @@ function postMyRecipes(state) {
 //TODO: look up local storage, session storage, cookies
 $(function main() {
   let appState = initAppState();
-  let testObj = {'my balls': 'are big'};
 
-  // if(typeof redirectResponse != 'undefined' && typeof window.sessionStorage.getItem('accessToken') === 'undefined'){
-    // appState.accessToken = redirectResponse.split('&')[0].split('=')[1];
-    // window.sessionStorage.setItem('accessToken', appState.accessToken);
-    // appState.loggedIn = true;
-  // }
   if(window.sessionStorage.getItem('accessToken') !== null) {
     appState.loggedIn = true;
   }
