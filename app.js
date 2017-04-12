@@ -9,7 +9,7 @@ function initAppState() {
     resultList: [],
     currentView: 'search',
     previousHtml: '',
-    myRecipes: {},//list of recipe objs
+    myRecipes: [],//list of recipe objs
     loggedIn: false,
     accessToken: ''
   };
@@ -147,22 +147,50 @@ function getMyRecipes(state) {
     method: 'GET',
     dataType: 'json',
     data: {
-      authorization: 'Bearer '+ state.accessToken,
-      arg: JSON.stringify({path: '/my-recipes.json'}),
+      authorization: 'Bearer '+ window.sessionStorage.getItem('accessToken'),
+      arg: JSON.stringify({path: '/questions.json'}),
       reject_cors_preflight: true
     }
   };
   return $.ajax(ajaxSettings);
 }
 
+function postMyRecipes(state) {
+  let jstring = JSON.stringify(state.myRecipes);
+  let ajaxSettings = {
+    url: 'https://content.dropboxapi.com/2/files/upload',
+    method: 'POST',
+    contentType: 'application/octet-stream',
+    data: jstring,
+    headers: {
+      Authorization: 'Bearer '+window.sessionStorage.getItem('accessToken'),
+      'Dropbox-API-Arg': JSON.stringify({path: '/burt2.json'})
+    }
+  };
+  return $.ajax(ajaxSettings);
+}
 
+//TODO: localstorage.setItem
+//TODO: look up local storage, session storage, cookies
 $(function main() {
   let appState = initAppState();
-  let redirectResponse = window.location.href.split('#')[1];
+  let testObj = {'my balls': 'are big'};
 
-  if(typeof redirectResponse != 'undefined'){
-    appState.accessToken = redirectResponse.split('&')[0].split('=')[1];
+  // if(typeof redirectResponse != 'undefined' && typeof window.sessionStorage.getItem('accessToken') === 'undefined'){
+    // appState.accessToken = redirectResponse.split('&')[0].split('=')[1];
+    // window.sessionStorage.setItem('accessToken', appState.accessToken);
+    // appState.loggedIn = true;
+  // }
+  if(window.sessionStorage.getItem('accessToken') !== null) {
     appState.loggedIn = true;
+  }
+  else {
+    let redirectResponse = window.location.href.split('#')[1];
+    if(typeof redirectResponse != 'undefined') {
+      window.sessionStorage.setItem('accessToken', redirectResponse.split('&')[0].split('=')[1]);
+      window.location.replace(REDIRECT_URI);
+      appState.loggedIn = true;
+    }
   }
 
   $('#search-form').on('submit', function(event) {
@@ -195,6 +223,21 @@ $(function main() {
       xhr.then(
         function success(data) {
           appState.myRecipes = data;
+          console.log(appState.myRecipes);
+        },
+        function error(jqxhr) {
+          console.log(jqxhr.responseText);
+        }
+      );
+    }
+  });
+
+  $('#search-button').on('click', function () {
+    if(appState.loggedIn) {
+      let xhr = postMyRecipes(appState);
+      xhr.then(
+        function success(data) {
+          console.log('Success!');
         },
         function error(jqxhr) {
           console.log(jqxhr.responseText);
