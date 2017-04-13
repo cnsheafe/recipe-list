@@ -25,6 +25,20 @@ export function getMyRecipes(state) {
   return $.ajax(ajaxSettings);
 }
 
+export function deleteFileHelper() {
+  let ajaxSettings = {
+    url: 'https://api.dropboxapi.com/2/files/delete',
+    method: 'POST',
+    dataType: 'json',
+    contentType: 'application/json',
+    data: JSON.stringify({path: '/burt2.json'}),
+    headers : {
+      Authorization: 'Bearer '+window.sessionStorage.getItem('accessToken')
+    }
+  };
+  return $.ajax(ajaxSettings);
+}
+
 export function postMyRecipes(state) {
   let jstring = JSON.stringify(state.myRecipes);
   let ajaxSettings = {
@@ -34,7 +48,7 @@ export function postMyRecipes(state) {
     data: jstring,
     headers: {
       Authorization: 'Bearer '+window.sessionStorage.getItem('accessToken'),
-      'Dropbox-API-Arg': JSON.stringify({path: '/burt3.json'})
+      'Dropbox-API-Arg': JSON.stringify({path: '/burt2.json'})
     }
   };
   return $.ajax(ajaxSettings);
