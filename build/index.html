@@ -11,7 +11,7 @@
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous" defer>
   </script>
-  <script src="../src/scripts/app.js" defer></script>
+  <script src="js/app.min.js" defer></script>
   <title>Recipe-prototype</title>
 </head>
 
@@ -24,19 +24,19 @@
     <ul>
       <li id='login'>Login</li>
       <li id="search-button">Search</li>
-      <li>Create</li>
+      <li id="create-recipe">Create</li>
       <li id="my-recipes">My Recipes</li>
     </ul>
   </aside>
 
   <main>
-    <form id="search-form">
+    <form id="search-form" class="viewable">
       <label for="search-bar">
         <input type="text" id="search-bar">
         <input type="submit">
       </label>
     </form>
-    <ul id="search-results">
+    <ul id="search-results" class="viewable">
     <!-- Jquery will generated listed items. Each list item will have data attribute "recipeId" attached. -->
     </ul>
     <ul id="my-recipe-list" class="hide">
@@ -44,7 +44,11 @@
     </ul>
 
     <div id="create-recipe" class="hide">
-
+      <label for="recipe-title">
+        <input type="text" id="recipe-title">
+      </label>
+      <label for="recipe-ingredients">
+        
     </div>
   </main>
 </body>
