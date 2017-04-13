@@ -84,10 +84,11 @@ function renderRecipeDetails(simpleRecipeObj, state) {
 
 $(function main() {
   let appState = initAppState();
-
-  if(window.sessionStorage.getItem('accessToken') !== null) {
+  let token = window.sessionStorage.getItem('accessToken');
+  if(token !== 'undefined') {
     appState.loggedIn = true;
   }
+
   else {
     let redirectResponse = window.location.href.split('#')[1];
     if(typeof redirectResponse != 'undefined') {
@@ -97,6 +98,7 @@ $(function main() {
     }
   }
 
+  console.log(appState.loggedIn);
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
     let query = $(this).find('#search-bar').val();
@@ -112,9 +114,9 @@ $(function main() {
     console.log($(this).data('recipeid'));
 
     let xhrPromise = recipe.getRecipeDetails($(this).data('recipeid'));
-    xhrPromise.done(function (data) {
-      renderRecipeDetails(simplifyRecipeDetails(data),appState);
-    });
+    xhrPromise.done(
+      (data) => renderRecipeDetails(simplifyRecipeDetails(data), appState)
+    );
   });
 
   $('#login').on('click', function() {
@@ -140,15 +142,27 @@ $(function main() {
     if(appState.loggedIn) {
       let xhr = dropbox.postMyRecipes(appState);
       xhr.then(
-        function success(data) {
-          console.log('Success!');
-        },
-        function error(jqxhr) {
-          console.log(jqxhr.responseText);
-        }
+        data => console.log('Success!'),
+        jqxhr => console.log(jqxhr.responseText)
       );
     }
   });
 
   $('#create-recipe').on('click', () => create.renderPage() );
+  $('.create-list').on('keypress', 'li',
+  function (event) {
+    create.appendList($(this), event.key);
+  });
+  $('#new-recipe-page').find('form').on('click', 'button', function(event) {
+      event.preventDefault();
+      create.addRecipe(appState);
+      let xhr = dropbox.deleteFileHelper();
+      xhr.then(
+        data => dropbox.postMyRecipes(appState).then(
+          data => console.log('Success'),
+          jqxhr => console.log(jqxhr.responseText)
+        ),
+        jqxhr => console.log(jqxhr.responseText)
+      );
+    });
 });
