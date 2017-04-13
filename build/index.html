@@ -30,26 +30,47 @@
   </aside>
 
   <main>
-    <form id="search-form" class="viewable">
-      <label for="search-bar">
-        <input type="text" id="search-bar">
-        <input type="submit">
-      </label>
-    </form>
-    <ul id="search-results" class="viewable">
-    <!-- Jquery will generated listed items. Each list item will have data attribute "recipeId" attached. -->
-    </ul>
-    <ul id="my-recipe-list" class="hide">
-      <h1>My Recipes</h1>
-    </ul>
 
-    <div id="create-recipe" class="hide">
-      <label for="recipe-title">
-        <input type="text" id="recipe-title">
-      </label>
-      <label for="recipe-ingredients">
-        
+    <div id="search-page" class="viewable">
+      <form id="search-form">
+        <label>
+          <input type="text" id="search-bar">
+          <input type="submit">
+        </label>
+      </form>
+      <ul id="search-results">
+        <!-- Jquery will generated listed items. Each list item will have data attribute "recipeId" attached. -->
+      </ul>
     </div>
+
+    <div id="my-recipes-page" class="hide">
+      <ul id="my-recipe-list">
+        <h1>My Recipes</h1>
+      </ul>
+    </div>
+
+
+    <div id="new-recipe-page" class="hide">
+      <form action="#">
+        <label>Title
+          <input type="text" id="recipe-title" placeholder="Apple Pie">
+        </label>
+        <label>
+          <input type="text" id="ready-in-mins" placeholder="5">Mins
+        </label>
+        <ul id="ingredients" class="create-list">
+          <h2>Ingredients</h2>
+          <li><input type="text" placeholder="apple"></li>
+        </ul>
+        <ol id="steps" class="create-list">
+          <h2>Steps</h2>
+          <li><input type="text" placeholder="Throw apple against wall"></li>
+        </ol>
+        <button type="button">Submit</button>
+      </form>
+
+    </div>
+
   </main>
 </body>
 
