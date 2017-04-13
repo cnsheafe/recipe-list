@@ -1,9 +1,10 @@
 //jshint esversion: 6
 
-const CLIENT_ID = 'myj4y8uy5mlsg9s';
-const MASHAPE_KEY = 'AyBmxPBKYUmshcuDOEgra2staJv9p1Tm8cgjsnsk5j9j5dONbK';
+import * as recipe from './modules/spoonacular';
+import * as dropbox from './modules/dropbox';
+import * as create from './modules/pages-create';
+
 const REDIRECT_URI = 'http://localhost/spoon-n-drop/build/';
-const MYRECIPES_PATH = '/my-recipes.json';
 function initAppState() {
   return {
     resultList: [],
@@ -15,39 +16,6 @@ function initAppState() {
   };
 }
 
-function getSearchResults(userQuery) {
-  let ajaxSettings = {
-    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/site/search',
-    data: {
-      query: userQuery
-    },
-    dataType: 'json',
-    headers: {
-      'X-Mashape-Key': MASHAPE_KEY,
-      Accept: 'application/json'
-    }
-  };
-  return $.ajax(ajaxSettings);
-}
-
-function getSearchResultsByIngredient(myIngredients, numResults=5) {
-  let ajaxSettings = {
-    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients',
-    data: {
-      fillIngredients: false,
-      ingredients: myIngredients,
-      limitLicense: false,
-      number: numResults,
-      ranking: 1
-    },
-    dataType: 'json',
-    headers: {
-      'X-Mashape-Key': MASHAPE_KEY,
-      Accept: 'application/json'
-    }
-  };
-  return $.ajax(ajaxSettings);
-}
 
 function makeResultsList(resultObj, state) {
   let previewList = [];
@@ -74,21 +42,6 @@ function renderResultsList(state){
     '</li></a>';
   });
   $('#search-results').html(previewHtml);
-}
-
-function getRecipeDetails(id) {
-  let ajaxSettings = {
-    url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+id+'/information',
-    data: {
-      includeNutrition: false
-    },
-    dataType: 'json',
-    headers: {
-      'X-Mashape-Key': MASHAPE_KEY,
-      Accept: 'application/json'
-    }
-  };
-  return $.ajax(ajaxSettings);
 }
 
 function simplifyRecipeDetails(recipeObj) {
@@ -128,50 +81,7 @@ function renderRecipeDetails(simpleRecipeObj, state) {
   $('main').html(recipeInfoHtml);
 }
 
-function addToMyRecipes(simpleRecipeObj, state) {
-  state.push(simpleRecipeObj);
-}
 
-function redirectToOAuth(){
-  let url = 'https://www.dropbox.com/oauth2/authorize?'+
-  'response_type=token&'+
-  'client_id='+CLIENT_ID+'&'+
-  'redirect_uri='+REDIRECT_URI;
-  window.location.replace(url);
-}
-
-/*GET and param urls used to avoid CORS pre-flight*/
-function getMyRecipes(state) {
-  let ajaxSettings = {
-    url: 'https://content.dropboxapi.com/2/files/download',
-    method: 'GET',
-    dataType: 'json',
-    data: {
-      authorization: 'Bearer '+ window.sessionStorage.getItem('accessToken'),
-      arg: JSON.stringify({path: '/questions.json'}),
-      reject_cors_preflight: true
-    }
-  };
-  return $.ajax(ajaxSettings);
-}
-
-function postMyRecipes(state) {
-  let jstring = JSON.stringify(state.myRecipes);
-  let ajaxSettings = {
-    url: 'https://content.dropboxapi.com/2/files/upload',
-    method: 'POST',
-    contentType: 'application/octet-stream',
-    data: jstring,
-    headers: {
-      Authorization: 'Bearer '+window.sessionStorage.getItem('accessToken'),
-      'Dropbox-API-Arg': JSON.stringify({path: '/burt2.json'})
-    }
-  };
-  return $.ajax(ajaxSettings);
-}
-
-//TODO: localstorage.setItem
-//TODO: look up local storage, session storage, cookies
 $(function main() {
   let appState = initAppState();
 
@@ -191,7 +101,7 @@ $(function main() {
     event.preventDefault();
     let query = $(this).find('#search-bar').val();
 
-    let xhrPromise = getSearchResults(query);
+    let xhrPromise = recipe.getSearchResults(query);
     xhrPromise.done(function (data) {
       makeResultsList(data,appState);
       renderResultsList(appState);
@@ -201,19 +111,19 @@ $(function main() {
   $('#search-results').on('click','li',function() {
     console.log($(this).data('recipeid'));
 
-    let xhrPromise = getRecipeDetails($(this).data('recipeid'));
+    let xhrPromise = recipe.getRecipeDetails($(this).data('recipeid'));
     xhrPromise.done(function (data) {
       renderRecipeDetails(simplifyRecipeDetails(data),appState);
     });
   });
 
   $('#login').on('click', function() {
-    if(!appState.loggedIn) {redirectToOAuth();}
+    if(!appState.loggedIn) {dropbox.OAuth();}
   });
 
   $('#my-recipes').on('click', function() {
     if(appState.loggedIn) {
-      let xhr = getMyRecipes(appState);
+      let xhr = dropbox.getMyRecipes(appState);
       xhr.then(
         function success(data) {
           appState.myRecipes = data;
@@ -228,7 +138,7 @@ $(function main() {
 
   $('#search-button').on('click', function () {
     if(appState.loggedIn) {
-      let xhr = postMyRecipes(appState);
+      let xhr = dropbox.postMyRecipes(appState);
       xhr.then(
         function success(data) {
           console.log('Success!');
@@ -240,4 +150,5 @@ $(function main() {
     }
   });
 
+  $('#create-recipe').on('click', () => create.renderPage() );
 });
