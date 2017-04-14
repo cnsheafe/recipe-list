@@ -8,32 +8,28 @@ export function renderPage() {
 }
 
 export function renderNewListItem(element, keyPressed) {
-  if(keyPressed==='Enter') {
+  if(keyPressed === 'Enter') {
     element.after('<li><input type="text" placeholder="new item"></li>');
   }
 }
 
 export function addRecipe(state) {
   let title = $('#recipe-title').val();
-  console.log(title);
   let time = $('#ready-in-mins').val();
   let ingredients = [];
   $('#ingredients').find('input').each(
     (index, element) => ingredients.push($(element).val())
   );
 
-  console.log(ingredients);
   let steps = [];
   $('#steps').find('input').each(
     (index, element) => steps.push($(element).val())
   );
 
-  console.log(steps);
   state.myRecipes.push({
     title: title,
     readyInMinutes: time,
     listofIngredients: ingredients,
     instructions: steps
   });
-  console.log(state.myRecipes);
 }

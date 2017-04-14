@@ -86,7 +86,7 @@ function renderRecipeDetails(simpleRecipeObj, state) {
 $(function main() {
   let appState = initAppState();
   let token = window.sessionStorage.getItem('accessToken');
-  console.log(token);
+
   if(token !== 'undefined' && token !== null) {
     appState.loggedIn = true;
   }
@@ -100,23 +100,18 @@ $(function main() {
     }
   }
 
-  console.log(appState.loggedIn);
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
     let query = $(this).find('#search-bar').val();
-
-    let xhrPromise = recipe.getSearchResults(query);
-    xhrPromise.done(function (data) {
+    recipe.getSearchResults(query).done(function (data) {
       makeResultsList(data,appState);
       renderResultsList(appState);
     });
   });
 
   $('#search-results').on('click','li',function() {
-    console.log($(this).data('recipeid'));
-
-    let xhrPromise = recipe.getRecipeDetails($(this).data('recipeid'));
-    xhrPromise.done(
+    let xhr = recipe.getRecipeDetails($(this).data('recipeid'));
+    xhr.done(
       data => renderRecipeDetails(simplifyRecipeDetails(data), appState)
     );
   });
@@ -127,47 +122,28 @@ $(function main() {
 
   $('#my-recipes').on('click', function() {
     if(appState.loggedIn) {
-      let xhr = dropbox.getMyRecipes();
-      xhr.then(
-        function success(data) {
-          appState.myRecipes = data;
-          console.log(appState.myRecipes);
-        },
-        function error(jqxhr) {
-          console.log(jqxhr.responseText);
-        }
-      );
-    }
-  });
-
-  $('#search-button').on('click', function () {
-    if(appState.loggedIn) {
-      let xhr = dropbox.postMyRecipes(appState);
-      xhr.then(
-        data => console.log('Success!'),
+      dropbox.getMyRecipes().then(
+        data => appState.myRecipes = data,
         jqxhr => console.log(jqxhr.responseText)
       );
     }
   });
 
+  $('#search-for-recipes').on('click', function () {
+  });
+
   $('#create-recipe').on('click', () => create.renderPage() );
-  $('.create-list').on('keypress', 'li',
-  function (event) {
+  $('.create-list').on('keypress', 'li', function (event) {
     create.renderNewListItem($(this), event.key);
   });
   $('#new-recipe-page').find('form').on('click', 'button', function(event) {
-      event.preventDefault();
-      create.addRecipe(appState);
-      let xhr = dropbox.deleteFileHelper();
-      xhr.then(
-        data => dropbox.postMyRecipes(appState).then(
-          data => console.log('Success'),
-          jqxhr => console.log(jqxhr.responseText)
-        ),
-        jqxhr => dropbox.postMyRecipes(appState).then(
-          data => console.log('Success'),
-          jqxhr => console.log(jqxhr.responseText)
-        )
-      );
-    });
+    event.preventDefault();
+    create.addRecipe(appState);
+    dropbox.deleteFileHelper().always(
+      data => dropbox.postMyRecipes(appState).then(
+        data => console.log('Success'),
+        jqxhr => console.log(jqxhr.responseText)
+      )
+    );
+  });
 });
