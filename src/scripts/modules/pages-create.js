@@ -7,7 +7,7 @@ export function renderPage() {
   $('#new-recipe-page').addClass('viewable');
 }
 
-export function appendList(element, keyPressed) {
+export function renderNewListItem(element, keyPressed) {
   if(keyPressed==='Enter') {
     element.after('<li><input type="text" placeholder="new item"></li>');
   }
@@ -21,13 +21,13 @@ export function addRecipe(state) {
   $('#ingredients').find('input').each(
     (index, element) => ingredients.push($(element).val())
   );
-  // let ingredients = $('#ingredients').find('input').val();
+
   console.log(ingredients);
   let steps = [];
   $('#steps').find('input').each(
     (index, element) => steps.push($(element).val())
   );
-  // let steps = $('#steps').find('input').val();
+
   console.log(steps);
   state.myRecipes.push({
     title: title,

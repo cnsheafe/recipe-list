@@ -11,14 +11,14 @@ export function OAuth(){
   window.location.replace(url);
 }
 /*GET and param urls used to avoid CORS pre-flight*/
-export function getMyRecipes(state) {
+export function getMyRecipes() {
   let ajaxSettings = {
     url: 'https://content.dropboxapi.com/2/files/download',
     method: 'GET',
     dataType: 'json',
     data: {
       authorization: 'Bearer '+ window.sessionStorage.getItem('accessToken'),
-      arg: JSON.stringify({path: '/questions.json'}),
+      arg: JSON.stringify({path: STORAGE_PATH}),
       reject_cors_preflight: true
     }
   };
@@ -31,7 +31,7 @@ export function deleteFileHelper() {
     method: 'POST',
     dataType: 'json',
     contentType: 'application/json',
-    data: JSON.stringify({path: '/burt2.json'}),
+    data: JSON.stringify({path: STORAGE_PATH}),
     headers : {
       Authorization: 'Bearer '+window.sessionStorage.getItem('accessToken')
     }
@@ -40,15 +40,14 @@ export function deleteFileHelper() {
 }
 
 export function postMyRecipes(state) {
-  let jstring = JSON.stringify(state.myRecipes);
   let ajaxSettings = {
     url: 'https://content.dropboxapi.com/2/files/upload',
     method: 'POST',
     contentType: 'application/octet-stream',
-    data: jstring,
+    data: JSON.stringify(state.myRecipes),
     headers: {
       Authorization: 'Bearer '+window.sessionStorage.getItem('accessToken'),
-      'Dropbox-API-Arg': JSON.stringify({path: '/burt2.json'})
+      'Dropbox-API-Arg': JSON.stringify({path: STORAGE_PATH})
     }
   };
   return $.ajax(ajaxSettings);
