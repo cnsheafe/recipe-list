@@ -23,13 +23,14 @@ function makeResultsList(resultObj, state) {
   $.each(resultObj.Recipes, function(ind, obj) {
     recipeId = obj.link.split('-').pop();
     console.log(recipeId);
-    previewList.push({
+    // previewList.push({
+    state.resultList.push({
       title: obj.name,
       imgUrl: obj.image,
       id: recipeId
     });
   });
-  state.resultList = previewList;
+  // state.resultList = previewList;
 }
 
 function renderResultsList(state){
@@ -85,7 +86,8 @@ function renderRecipeDetails(simpleRecipeObj, state) {
 $(function main() {
   let appState = initAppState();
   let token = window.sessionStorage.getItem('accessToken');
-  if(token !== 'undefined') {
+  console.log(token);
+  if(token !== 'undefined' && token !== null) {
     appState.loggedIn = true;
   }
 
@@ -115,7 +117,7 @@ $(function main() {
 
     let xhrPromise = recipe.getRecipeDetails($(this).data('recipeid'));
     xhrPromise.done(
-      (data) => renderRecipeDetails(simplifyRecipeDetails(data), appState)
+      data => renderRecipeDetails(simplifyRecipeDetails(data), appState)
     );
   });
 
@@ -125,7 +127,7 @@ $(function main() {
 
   $('#my-recipes').on('click', function() {
     if(appState.loggedIn) {
-      let xhr = dropbox.getMyRecipes(appState);
+      let xhr = dropbox.getMyRecipes();
       xhr.then(
         function success(data) {
           appState.myRecipes = data;
@@ -151,7 +153,7 @@ $(function main() {
   $('#create-recipe').on('click', () => create.renderPage() );
   $('.create-list').on('keypress', 'li',
   function (event) {
-    create.appendList($(this), event.key);
+    create.renderNewListItem($(this), event.key);
   });
   $('#new-recipe-page').find('form').on('click', 'button', function(event) {
       event.preventDefault();
@@ -162,7 +164,10 @@ $(function main() {
           data => console.log('Success'),
           jqxhr => console.log(jqxhr.responseText)
         ),
-        jqxhr => console.log(jqxhr.responseText)
+        jqxhr => dropbox.postMyRecipes(appState).then(
+          data => console.log('Success'),
+          jqxhr => console.log(jqxhr.responseText)
+        )
       );
     });
 });
