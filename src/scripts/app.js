@@ -4,6 +4,8 @@ import * as recipe from './modules/api/spoonacular';
 import * as dropbox from './modules/api/dropbox';
 import * as create from './modules/page-views/create';
 import * as search from './modules/page-views/search';
+import * as my_recipes from './modules/page-views/my-recipes';
+import {renderRecipe} from './modules/page-views/render';
 
 const REDIRECT_URI = 'http://localhost/spoon-n-drop/build/';
 function initAppState() {
@@ -58,12 +60,23 @@ $(function main() {
   $('#my-recipes').on('click', function() {
     if(appState.loggedIn) {
       dropbox.getMyRecipes().then(
-        data => appState.myRecipes = data,
+        data => {
+          appState.myRecipes = data;
+          console.log(appState.myRecipes);
+          my_recipes.render(appState);
+        },
         jqxhr => console.log(jqxhr.responseText)
       );
     }
   });
 
+  $('#my-recipes-page').on('click', '.my-recipe-list-item', function() {
+    const position = $('#my-recipes-page').find('li').index($(this));
+    console.log(position);
+    renderRecipe($('main'), appState.myRecipes[position]);
+  }
+
+  );
   $('#search-for-recipes').on('click', function () {
   });
 
