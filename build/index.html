@@ -45,8 +45,9 @@
     </div>
 
     <div id="my-recipes-page" class="hide">
-      <ul id="my-recipe-list">
-        <h1>My Recipes</h1>
+      <h1>My Recipes</h1>
+      <ul>
+
       </ul>
     </div>
 
@@ -55,13 +56,15 @@
       <form action="#">
         <label>Title
           <input type="text" id="recipe-title" placeholder="Apple Pie">
-        </label>
-        <label>
           <input type="text" id="ready-in-mins" placeholder="5">Mins
         </label>
+
         <ul id="ingredients" class="create-list">
           <h2>Ingredients</h2>
-          <li><input type="text" placeholder="apple"></li>
+          <li>
+            <input type="text" class="ingredient-name" placeholder="apple">
+            <input type="text" class="ingredient-amount" placeholder="1">
+          </li>
         </ul>
         <ol id="steps" class="create-list">
           <h2>Steps</h2>
