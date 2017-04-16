@@ -5,7 +5,7 @@ import * as dropbox from './modules/api/dropbox';
 import * as create from './modules/page-views/create';
 import * as search from './modules/page-views/search';
 import * as my_recipes from './modules/page-views/my-recipes';
-import {renderRecipe} from './modules/page-views/render';
+import * as render from './modules/page-views/render-generic';
 
 const REDIRECT_URI = 'http://localhost/spoon-n-drop/build/';
 function initAppState() {
@@ -19,23 +19,24 @@ function initAppState() {
   };
 }
 
-
-$(function main() {
-  let appState = initAppState();
-  let token = window.sessionStorage.getItem('accessToken');
-
-  if(token !== 'undefined' && token !== null) {
-    appState.loggedIn = true;
-  }
-
+function userHasAccessToken(token) {
+  if(token !== 'undefined' && token !== null) {return true;}
   else {
     let redirectResponse = window.location.href.split('#')[1];
     if(typeof redirectResponse != 'undefined') {
       window.sessionStorage.setItem('accessToken', redirectResponse.split('&')[0].split('=')[1]);
       window.location.replace(REDIRECT_URI);
-      appState.loggedIn = true;
+      return true;
     }
+    else {return false;}
   }
+}
+
+$(function main() {
+  let appState = initAppState();
+  let token = window.sessionStorage.getItem('accessToken');
+
+  if(userHasAccessToken(token)) {appState.loggedIn = true;}
 
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
@@ -48,22 +49,26 @@ $(function main() {
 
   $('#search-results').on('click','li',function() {
     let xhr = recipe.getRecipeDetails($(this).data('recipeid'));
-    xhr.done(
-      data => search.renderRecipeDetails(search.simplifyRecipeDetails(data), appState)
-    );
+    xhr.done( function (data) {
+      const $recipePage = $('#single-recipe-page');
+      render.switchView($recipePage);
+      render.showRecipe($recipePage, search.simplifyRecipeDetails(data));
+    });
   });
 
-  $('#login').on('click', function() {
-    if(!appState.loggedIn) {dropbox.OAuth();}
-  });
+  $('#login').on('click', () => { if(!appState.loggedIn) {dropbox.OAuth();} });
 
-  $('#my-recipes').on('click', function() {
+  $('#search-for-recipes').on('click', () => render.switchView($('#search-page')));
+  $('#create-recipe').on('click', () => render.switchView($('#new-recipe-page')) );
+
+  $('#my-recipes').on('click', function () {
     if(appState.loggedIn) {
       dropbox.getMyRecipes().then(
         data => {
           appState.myRecipes = data;
           console.log(appState.myRecipes);
-          my_recipes.render(appState);
+          render.switchView($('#my-recipes-page'));
+          my_recipes.showList(appState);
         },
         jqxhr => console.log(jqxhr.responseText)
       );
@@ -72,18 +77,11 @@ $(function main() {
 
   $('#my-recipes-page').on('click', '.my-recipe-list-item', function() {
     const position = $('#my-recipes-page').find('li').index($(this));
-    console.log(position);
-    renderRecipe($('main'), appState.myRecipes[position]);
-  }
-
-  );
-  $('#search-for-recipes').on('click', function () {
+    render.showRecipe( $('#single-recipe-page'),appState.myRecipes[position]
+    );
   });
 
-  $('#create-recipe').on('click', () => create.renderPage() );
-  $('.create-list').on('keypress', 'li', function (event) {
-    create.renderNewListItem($(this), event.key);
-  });
+
   $('#new-recipe-page').find('form').on('click', 'button', function(event) {
     event.preventDefault();
     create.addRecipe(appState);
@@ -93,5 +91,9 @@ $(function main() {
         jqxhr => console.log(jqxhr.responseText)
       )
     );
+  });
+
+  $('.create-list').on('keypress', 'li', function (event) {
+    create.newListItem($(this), event.key);
   });
 });
