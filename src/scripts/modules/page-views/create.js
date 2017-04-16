@@ -1,23 +1,5 @@
 // jshint esversion:6
 
-export function renderPage() {
-  const $main = $('main');
-  const $newRecipe = $('#new-recipe-page');
-  $main.find('.viewable').addClass('hide');
-  $main.find('.viewable').removeClass('viewable');
-  $newRecipe.removeClass('hide');
-  $newRecipe.addClass('viewable');
-}
-
-export function renderNewListItem($element, keyPressed) {
-  if(keyPressed === 'Enter') {
-    $element.after('<li>'+
-    '<input type="text" class="ingredient-name" placeholder="new item">'+
-    '<input type="text" class="ingredient-amount" placeholder="amount">'+
-    '</li>');
-  }
-}
-
 export function addRecipe(state) {
   let title = $('#recipe-title').val();
   let time = $('#ready-in-mins').val();
@@ -41,4 +23,18 @@ export function addRecipe(state) {
     listofIngredients: ingredients,
     instructions: steps
   });
+}
+
+export function newListItem($element, keyPressed) {
+  if(keyPressed === 'Enter') {
+    if ($element.hasClass('ingredient')) {
+    $element.after('<li class="ingredient">'+
+    '<input type="text" class="ingredient-name" placeholder="new item">'+
+    '<input type="text" class="ingredient-amount" placeholder="amount">'+
+    '</li>');
+    }
+    else {
+      $element.after('<li><input type="text" placeholder="new step"></li>');
+    }
+  }
 }

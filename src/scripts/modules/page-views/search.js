@@ -1,6 +1,7 @@
 // jshint esversion:6
 export function makeResultsList(resultObj, state) {
   let recipeId = '';
+  state.resultList = [];
   $.each(resultObj.Recipes, function(ind, obj) {
     recipeId = obj.link.split('-').pop();
 
@@ -45,20 +46,4 @@ export function simplifyRecipeDetails(recipeObj) {
     listofIngredients: ingredients,
     instructions: steps
   };
-}
-
-export function renderRecipeDetails(simpleRecipeObj, state) {
-  state.previousHtml = $('main').html();
-  let recipeInfoHtml ='<span><h1>'+
-    simpleRecipeObj.title+'</h1>'+
-    '<h2>'+simpleRecipeObj.time+'minutes</h2></span><ul>';
-  $.each(simpleRecipeObj.listofIngredients, function(ind, obj) {
-    recipeInfoHtml += '<li>'+obj.amount+obj.name+'</li>';
-  });
-  recipeInfoHtml += '</ul><ol>';
-  $.each(simpleRecipeObj.instructions, function(ind,val) {
-    recipeInfoHtml += '<li>'+val+'</li>';
-  });
-  recipeInfoHtml += '</ol>';
-  $('main').html(recipeInfoHtml);
 }

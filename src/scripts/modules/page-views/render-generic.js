@@ -1,5 +1,5 @@
 // jshint esversion:6
-export function renderRecipe($selector, recipe) {
+export function showRecipe($selector, recipe) {
   console.log(recipe);
   let recipeInfo ='<span><h1>'+
     recipe.title+'</h1>'+
@@ -14,4 +14,12 @@ export function renderRecipe($selector, recipe) {
   recipeInfo += '</ol>';
 
   $selector.html(recipeInfo);
+}
+
+
+export function switchView($pageView) {
+  $('#new-recipe-page').addClass('hide');
+  $('#search-page').addClass('hide');
+  $('#my-recipes-page').addClass('hide');
+  $pageView.removeClass('hide');
 }
