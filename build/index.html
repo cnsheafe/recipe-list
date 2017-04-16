@@ -32,7 +32,7 @@
 
   <main>
 
-    <div id="search-page" class="viewable">
+    <div id="search-page">
       <form id="search-form">
         <label>
           <input type="text" id="search-bar">
@@ -51,6 +51,7 @@
       </ul>
     </div>
 
+    <div id="single-recipe-page" class="hide"></div>
 
     <div id="new-recipe-page" class="hide">
       <form action="#">
@@ -61,7 +62,7 @@
 
         <ul id="ingredients" class="create-list">
           <h2>Ingredients</h2>
-          <li>
+          <li class="ingredient">
             <input type="text" class="ingredient-name" placeholder="apple">
             <input type="text" class="ingredient-amount" placeholder="1">
           </li>
