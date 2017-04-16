@@ -1,1 +1,1 @@
-Recipe app in the works. 
+Recipe app in the works. Using rollup for modularization.
