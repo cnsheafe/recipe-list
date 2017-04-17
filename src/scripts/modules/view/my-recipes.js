@@ -1,7 +1,7 @@
 // jshint esversion:6
 
 export function showList(state) {
-  let $myRecipes = $('#my-recipes-page');
+  const $myRecipes = $('#my-recipes-page');
   let html = '';
 
   $.each(state.myRecipes, function(index, recipeObj) {

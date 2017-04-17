@@ -3,9 +3,10 @@
 import * as recipe from './api/spoonacular';
 import * as dropbox from './api/dropbox';
 import * as create from '../view/create';
-import * as search from '../model/search';
+import * as search from '../model/search-model';
 import * as my_recipes from '../view/my-recipes';
 import * as render from '../view/render-generic';
+import * as search_results from '../view/search-results';
 
 const REDIRECT_URI = 'http://localhost/spoon-n-drop/build/';
 // const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build';
@@ -52,8 +53,8 @@ $(function main() {
     event.preventDefault();
     let query = $(this).find('#search-bar').val();
     recipe.getSearchResults(query).done(function (data) {
-      search.makeResultsList(data,appState);
-      search.renderResultsList(appState);
+      search.storeResults(data, appState);
+      search_results.showSearchResults(appState);
     });
   });
 
@@ -62,7 +63,7 @@ $(function main() {
     xhr.done( function (data) {
       const $recipePage = $('#single-recipe-page');
       render.switchView($recipePage);
-      appState.currentRecipe = search.simplifyRecipeDetails(data);
+      appState.currentRecipe = search.simplifyRecipe(data);
       render.showRecipe($recipePage.find('.recipe-container'), appState.currentRecipe
       );
     });
@@ -110,7 +111,8 @@ $(function main() {
 
   $('#new-recipe-page').find('form').on('click', 'button', function(event) {
     event.preventDefault();
-    create.addRecipe(appState);
+    appState.myRecipes.push(create.addRecipe());
+
     dropbox.deleteFileHelper().always(
       data => dropbox.postMyRecipes(appState).then(
         data => console.log('Success'),

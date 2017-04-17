@@ -1,6 +1,6 @@
 // jshint esversion:6
 
-export function addRecipe(state) {
+export function addRecipe() {
   let title = $('#recipe-title').val();
   let time = $('#ready-in-mins').val();
   let ingredients = []; //{name, amount}
@@ -17,12 +17,12 @@ export function addRecipe(state) {
     (index, element) => steps.push($(element).val())
   );
 
-  state.myRecipes.push({
+  return {
     title: title,
     readyInMinutes: time,
     listofIngredients: ingredients,
     instructions: steps
-  });
+  };
 }
 
 export function newListItem($element, keyPressed) {
@@ -37,8 +37,4 @@ export function newListItem($element, keyPressed) {
       $element.after('<li><input type="text" placeholder="new step"></li>');
     }
   }
-}
-
-export function editRecipe(recipeObj) {
-  
 }

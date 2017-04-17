@@ -16,7 +16,6 @@ export function showRecipe($selector, recipe) {
   $selector.html(recipeInfo);
 }
 
-
 export function switchView($pageView) {
   $('#new-recipe-page').addClass('hide');
   $('#search-page').addClass('hide');
