@@ -21,5 +21,6 @@ export function switchView($pageView) {
   $('#new-recipe-page').addClass('hide');
   $('#search-page').addClass('hide');
   $('#my-recipes-page').addClass('hide');
+  $('#single-recipe-page').addClass('hide');
   $pageView.removeClass('hide');
 }

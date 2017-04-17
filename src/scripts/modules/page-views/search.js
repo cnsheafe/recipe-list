@@ -42,7 +42,7 @@ export function simplifyRecipeDetails(recipeObj) {
   }
   return {
     title: recipeObj.title,
-    time: recipeObj.readyInMinutes,
+    readyInMinutes: recipeObj.readyInMinutes,
     listofIngredients: ingredients,
     instructions: steps
   };
