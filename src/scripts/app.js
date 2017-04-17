@@ -7,7 +7,9 @@ import * as search from './modules/page-views/search';
 import * as my_recipes from './modules/page-views/my-recipes';
 import * as render from './modules/page-views/render-generic';
 
-const REDIRECT_URI = 'http://localhost/spoon-n-drop/build/';
+// const REDIRECT_URI = 'http://localhost/spoon-n-drop/build/';
+const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build';
+
 function initAppState() {
   return {
     resultList: [],
