@@ -89,7 +89,9 @@ $(function main() {
     );
   });
   $('#my-recipes-page').on('click', '.edit-recipe', function() {
-
+    const position = $('#my-recipes-page').find('.edit-recipe').index($(this));
+    render.SwitchView($('#create-recipe-page'));
+    create.editRecipe(appState.myRecipes[position]);
   });
 
   $('#my-recipes-page').on('click', '.delete-recipe', function (event) {
