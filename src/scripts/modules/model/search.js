@@ -1,5 +1,5 @@
 // jshint esversion:6
-export function makeResultsList(resultObj, state) {
+export function storeResults(resultObj, state) {
   let recipeId = '';
   state.resultList = [];
   $.each(resultObj.Recipes, function(ind, obj) {
@@ -13,19 +13,7 @@ export function makeResultsList(resultObj, state) {
   });
 }
 
-export function renderResultsList(state){
-  let previewHtml = '';
-  $.each(state.resultList, function(ind, obj) {
-    previewHtml += '<li data-recipeid="'+obj.id+'"><a>'+
-    '<img src="'+obj.imgUrl+'" alt="'+obj.title+'">'+
-    '<span>'+obj.title+'</span>'+
-    '<form><input type="submit"></form>'+
-    '</li></a>';
-  });
-  $('#search-results').html(previewHtml);
-}
-
-export function simplifyRecipeDetails(recipeObj) {
+export function simplifyRecipe(recipeObj) {
   /*Refer to 'get-recipe-info-sample-response.json' for recipeObj's complete structure*/
   let ingredients = [];
   $.each(recipeObj.extendedIngredients, function(ind, obj) {
