@@ -9,3 +9,7 @@
 .hide {
   display: none;
 }
+
+li:hover {
+  cursor: pointer;
+}
