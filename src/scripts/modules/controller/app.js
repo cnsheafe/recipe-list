@@ -87,6 +87,7 @@ $(function main() {
 
   $('#my-recipes-page').on('click', '.my-recipe-list-item', function() {
     const position = $('#my-recipes-page').find('li').index($(this));
+    render.switchView($('#single-recipe-page'));
     render.showRecipe(
       $('#single-recipe-page').find('.recipe-container'), appState.myRecipes[position]
     );
@@ -94,7 +95,7 @@ $(function main() {
   $('#my-recipes-page').on('click', '.edit-recipe', function() {
     const position = $('#my-recipes-page').find('.edit-recipe').index($(this));
     render.switchView($('#create-recipe-page'));
-    create.editRecipe(appState.myRecipes[position]);
+    // create.editRecipe(appState.myRecipes[position]);
   });
 
   $('#my-recipes-page').on('click', '.delete-recipe', function (event) {
