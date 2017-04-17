@@ -1,14 +1,14 @@
 //jshint esversion: 6
 
-import * as recipe from './modules/api/spoonacular';
-import * as dropbox from './modules/api/dropbox';
-import * as create from './modules/page-views/create';
-import * as search from './modules/page-views/search';
-import * as my_recipes from './modules/page-views/my-recipes';
-import * as render from './modules/page-views/render-generic';
+import * as recipe from './api/spoonacular';
+import * as dropbox from './api/dropbox';
+import * as create from '../view/create';
+import * as search from '../model/search';
+import * as my_recipes from '../view/my-recipes';
+import * as render from '../view/render-generic';
 
-// const REDIRECT_URI = 'http://localhost/spoon-n-drop/build/';
-const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build';
+const REDIRECT_URI = 'http://localhost/spoon-n-drop/build/';
+// const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build';
 
 function initAppState() {
   return {
