@@ -9,7 +9,7 @@ import * as render from '../view/render-generic';
 import * as search_results from '../view/search-results';
 
 // const REDIRECT_URI = 'http://localhost/spoon-n-drop/build/';
-const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build';
+const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build/';
 
 function initAppState() {
   return {
