@@ -38,3 +38,7 @@ export function newListItem($element, keyPressed) {
     }
   }
 }
+
+export function editRecipe(recipeObj) {
+  
+}
