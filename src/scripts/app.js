@@ -15,7 +15,8 @@ function initAppState() {
     previousHtml: '',
     myRecipes: [], //list of recipe objs
     loggedIn: false,
-    accessToken: ''
+    accessToken: '',
+    currentRecipe: {}
   };
 }
 
@@ -36,7 +37,14 @@ $(function main() {
   let appState = initAppState();
   let token = window.sessionStorage.getItem('accessToken');
 
-  if(userHasAccessToken(token)) {appState.loggedIn = true;}
+  if(userHasAccessToken(token)) {
+    appState.loggedIn = true;
+    $('#login').text('Logged In');
+  }
+
+  $('#login').on('click', () => { if(!appState.loggedIn) {dropbox.OAuth();} });
+
+  $('#search-for-recipes').on('click', () => render.switchView($('#search-page')));
 
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
@@ -52,13 +60,12 @@ $(function main() {
     xhr.done( function (data) {
       const $recipePage = $('#single-recipe-page');
       render.switchView($recipePage);
-      render.showRecipe($recipePage, search.simplifyRecipeDetails(data));
+      appState.currentRecipe = search.simplifyRecipeDetails(data);
+      render.showRecipe($recipePage.find('.recipe-container'), appState.currentRecipe
+      );
     });
   });
 
-  $('#login').on('click', () => { if(!appState.loggedIn) {dropbox.OAuth();} });
-
-  $('#search-for-recipes').on('click', () => render.switchView($('#search-page')));
   $('#create-recipe').on('click', () => render.switchView($('#new-recipe-page')) );
 
   $('#my-recipes').on('click', function () {
@@ -77,10 +84,25 @@ $(function main() {
 
   $('#my-recipes-page').on('click', '.my-recipe-list-item', function() {
     const position = $('#my-recipes-page').find('li').index($(this));
-    render.showRecipe( $('#single-recipe-page'),appState.myRecipes[position]
+    render.showRecipe(
+      $('#single-recipe-page').find('.recipe-container'), appState.myRecipes[position]
     );
   });
+  $('#my-recipes-page').on('click', '.edit-recipe', function() {
 
+  });
+
+  $('#my-recipes-page').on('click', '.delete-recipe', function (event) {
+    event.stopPropagation();
+    const index = $('.delete-recipe').index($(this));
+    appState.myRecipes.splice(index,1);
+    dropbox.deleteFileHelper().always(
+      data => dropbox.postMyRecipes(appState).then(
+        data => {console.log('Success');my_recipes.showList(appState);},
+        jqxhr => console.log(jqxhr.responseText)
+      )
+    );
+  });
 
   $('#new-recipe-page').find('form').on('click', 'button', function(event) {
     event.preventDefault();
@@ -95,5 +117,17 @@ $(function main() {
 
   $('.create-list').on('keypress', 'li', function (event) {
     create.newListItem($(this), event.key);
+  });
+
+  $('#single-recipe-page').on('click', '#add-to-my-recipes', function() {
+    appState.myRecipes.push(appState.currentRecipe);
+    console.log(appState.myRecipes);
+    dropbox.deleteFileHelper().always(
+      data => dropbox.postMyRecipes(appState).then(
+        data => console.log('Success'),
+        jqxhr => console.log(jqxhr.responseText)
+      )
+    );
+    $(this).text('In My Recipes');
   });
 });
