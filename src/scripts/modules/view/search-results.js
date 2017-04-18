@@ -5,7 +5,7 @@ export function showSearchResults(state){
     previewHtml += '<li data-recipeid="'+obj.id+'"><a>'+
     '<img src="'+obj.imgUrl+'" alt="'+obj.title+'">'+
     '<span>'+obj.title+'</span>'+
-    '<form><input type="submit"></form>'+
+    // '<form><input type="submit"></form>'+
     '</li></a>';
   });
   $('#search-results').html(previewHtml);
