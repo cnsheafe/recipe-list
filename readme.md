@@ -1,7 +1,7 @@
 # Spoon 'N Drop
 A client-side recipe app to look up recipes and save them to your Dropbox.
 
-
+![My Recipes page on Spoon-N-Drop](screenshot.png)
 ## Motivation
 Intended to be a SPA that users can view recipes from [Spoonacular's](https://spoonacular.com) database without having to be sent to other websites. Recipes can then be stored in private storage, like [Dropbox](https://dropbox.com), and be retrieved later without having to go through extra steps.
 
