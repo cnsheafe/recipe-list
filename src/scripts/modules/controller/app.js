@@ -1,4 +1,7 @@
 //jshint esversion: 6
+// Main controller file that handles all event handlers
+// Using rollup for modules
+// command "rollup -c"
 
 import * as recipe from './api/spoonacular';
 import * as dropbox from './api/dropbox';
@@ -8,21 +11,17 @@ import * as my_recipes from '../view/my-recipes';
 import * as render from '../view/render-generic';
 import * as search_results from '../view/search-results';
 
-// const REDIRECT_URI = 'http://localhost/spoon-n-drop/build/';
 const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build/';
 
 function initAppState() {
   return {
     resultList: [],
-    currentView: 'search',
-    previousHtml: '',
     myRecipes: [], //list of recipe objs
     loggedIn: false,
-    accessToken: '',
     currentRecipe: {}
   };
 }
-
+// Checks if user already has access token in session storage
 function userHasAccessToken(token) {
   if(token !== 'undefined' && token !== null) {return true;}
   else {

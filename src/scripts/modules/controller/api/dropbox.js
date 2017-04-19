@@ -1,6 +1,6 @@
 // jshint esversion:6
+// See Dropbox APi v2 HTTP documentation
 const CLIENT_ID = 'myj4y8uy5mlsg9s';
-// const REDIRECT_URI = 'http://localhost/spoon-n-drop/build/';
 const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build/';
 const STORAGE_PATH = '/my-recipes.json';
 

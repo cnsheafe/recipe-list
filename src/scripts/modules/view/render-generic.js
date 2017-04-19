@@ -1,4 +1,5 @@
 // jshint esversion:6
+// Is used on more than one 'page'
 export function showRecipe($selector, recipe) {
   console.log(recipe);
   let recipeInfo ='<span><h1>'+
