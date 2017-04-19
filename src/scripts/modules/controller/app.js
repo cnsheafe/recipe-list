@@ -42,7 +42,7 @@ $(function main() {
 
   if(userHasAccessToken(token)) {
     appState.loggedIn = true;
-    $('#login').text('Logged In');
+    $('#login').find('h2').text('Logged In');
   }
 
   $('#login').on('click', () => { if(!appState.loggedIn) {dropbox.OAuth();} });
@@ -63,13 +63,17 @@ $(function main() {
     xhr.done( function (data) {
       const $recipePage = $('#single-recipe-page');
       render.switchView($recipePage);
+      $('#add-to-my-recipes').removeClass('hide');
       appState.currentRecipe = search.simplifyRecipe(data);
       render.showRecipe($recipePage.find('.recipe-container'), appState.currentRecipe
       );
     });
   });
 
-  $('#create-recipe').on('click', () => render.switchView($('#new-recipe-page')) );
+  $('#create-recipe').on('click', () => {
+    render.switchView($('#new-recipe-page'));
+    $('#add-to-my-recipes').removeClass('hide');
+  });
 
   $('#my-recipes').on('click', function () {
     if(appState.loggedIn) {
@@ -88,6 +92,7 @@ $(function main() {
   $('#my-recipes-page').on('click', '.my-recipe-list-item', function() {
     const position = $('#my-recipes-page').find('li').index($(this));
     render.switchView($('#single-recipe-page'));
+    $('#add-to-my-recipes').addClass('hide');
     render.showRecipe(
       $('#single-recipe-page').find('.recipe-container'), appState.myRecipes[position]
     );
@@ -95,7 +100,6 @@ $(function main() {
   $('#my-recipes-page').on('click', '.edit-recipe', function() {
     const position = $('#my-recipes-page').find('.edit-recipe').index($(this));
     render.switchView($('#create-recipe-page'));
-    // create.editRecipe(appState.myRecipes[position]);
   });
 
   $('#my-recipes-page').on('click', '.delete-recipe', function (event) {
