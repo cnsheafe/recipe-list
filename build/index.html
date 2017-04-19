@@ -7,7 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="../src/styles/normalize.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vollkorn">
   <link rel="stylesheet" href="../src/styles/main.css">
+
   <!-- <link rel="stylesheet" href="../src/styles/w3.css"> -->
   <script
     src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -15,31 +17,33 @@
     crossorigin="anonymous" defer>
   </script>
   <script src="js/app.min.js" defer></script>
-  <title>Recipe-prototype</title>
+  <title>Spoon 'N Drop</title>
 </head>
 
 <header>
   <h1>Spoon 'N Drop</h1>
-  <h2>Your one-stop shop for recipes</h2>
+  <!-- <h2>Your one-stop shop for recipes</h2> -->
 </header>
 
 <body>
   <aside id="side-bar">
     <ul>
-      <li id='login'>Dropbox Login</li>
-      <li id="search-for-recipes">Search</li>
-      <li id="create-recipe">Create</li>
-      <li id="my-recipes">My Recipes</li>
+      <li id='login'><h2>Dropbox Login</h2></li>
+      <li id="search-for-recipes"><h2>Search</h2></li>
+      <li id="create-recipe"><h2>Create</h2></li>
+      <li id="my-recipes"><h2>My Recipes</h2></li>
     </ul>
   </aside>
 
   <main>
 
-    <div id="search-page">
+    <div id="search-page" class="page">
+      <h2>Search for a Recipe</h2>
       <form id="search-form">
         <label>
           <input type="text" id="search-bar" placeholder="Search for recipes">
-          <input type="submit">
+          <button type="submit">Search</button>
+          <!-- <input type="submit"> -->
         </label>
       </form>
       <ul id="search-results">
@@ -47,14 +51,14 @@
       </ul>
     </div>
 
-    <div id="my-recipes-page" class="hide">
+    <div id="my-recipes-page" class="hide page">
       <h1>My Recipes</h1>
       <ul>
 
       </ul>
     </div>
 
-    <div id="single-recipe-page" class="hide">
+    <div id="single-recipe-page" class="hide page">
       <!-- TODO:Need to find a more suitable sub-container than div -->
       <div class="recipe-container">
 
@@ -62,23 +66,25 @@
       <button type="button" id="add-to-my-recipes">Add</button>
     </div>
 
-    <div id="new-recipe-page" class="hide">
+    <div id="new-recipe-page" class="hide page">
+      <h2>Create a Recipe</h2>
       <form action="#">
-        <label>Title
-          <input type="text" id="recipe-title" placeholder="Apple Pie">
-          <input type="text" id="ready-in-mins" placeholder="5">Mins
+        <label>
+          <input type="text" id="recipe-title" placeholder="Recipe Title">
+          <input type="text" id="ready-in-mins" placeholder="5">
+          <p>Mins</p>
         </label>
 
         <ul id="ingredients" class="create-list">
           <h2>Ingredients</h2>
           <li class="ingredient">
-            <input type="text" class="ingredient-name" placeholder="apple">
-            <input type="text" class="ingredient-amount" placeholder="1">
+            <input type="text" class="ingredient-name" placeholder="ingredient">
+            <input type="text" class="ingredient-amount" placeholder="amount">
           </li>
         </ul>
         <ol id="steps" class="create-list">
           <h2>Steps</h2>
-          <li><input type="text" placeholder="Throw apple against wall"></li>
+          <li><input type="text" placeholder="First step"></li>
         </ol>
         <button type="button">Submit</button>
       </form>
