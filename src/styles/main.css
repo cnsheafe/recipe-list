@@ -1,48 +1,311 @@
 * {
   box-sizing: border-box;
+  font-family: 'Vollkorn', serif;
 }
 
 header {
+  width: 85%;
+  margin: auto auto;
   text-align: center;
+}
+
+body {
+  margin: auto 0;
+}
+input[type='text'] {
+  border: 1px #E57373 solid;
+  height: 40px;
+  font-size: 20px;
+}
+
+button {
+  margin: auto 5px;
+  cursor: pointer;
+  border: 2px #E57373 solid;
+  background-color: #FF8080;
+  padding: 5px;
+  font-size: 20px;
+}
+
+button:hover {
+  border: 2px #F44336 solid;
 }
 
 #side-bar {
   position: fixed;
-  width: 14%;
+  top: 14%;
+  width: 15%;
+  font-size: 25px;
+  height: 100%;
+/*   padding-left: 20px; */
+/*   border-left: 20px #FF5722 solid; */
+/*   background-color: #FFCDD2; */
+  background: linear-gradient(#FFCCBC,white);
+}
+
+#side-bar ul {
+  padding-left: 0;
+  margin-top: 0;
+  list-style: none;
+  
 }
 
 #side-bar li {
-  list-style: none;
+  margin-bottom: 10px;
+  height: 40px;
+  cursor: pointer;
+  background-color: #FF8A65;
+  border-left: 20px #FF8A65 solid;
+}
+
+#side-bar h2 {
+  font-size: 25px;
+  font-weight: normal;
+  position: relative;
+  top: 10px;
+  margin: 0 auto;
 }
 
 main {
-  margin: auto 15%;
+  width: 80%;
+  margin: auto auto;
+}
+.page {
+  margin-left: 15%;  
 }
 
 #search-bar {
-  width: 60%;
-  margin-left: 16%;
+  width: 55%;
 }
 
 
 img {
   width: 100px;
 }
+a {
+  display: inline-block;
+}
 
 #search-results {
-  padding-left: 5px;
+  padding-left: 0;
+  width: 55%;
+}
+
+#search-results p {
+  font-size: 30px;
+/*   position: absolute; */
+  margin-left: 10px;
+  display: inline-block;
+}
+
+#single-recipe-page ul {
   list-style: none;
 }
 
-#search-results span {
-  font-size: 30px;
-  position: absolute;
-  margin-left: 10px;
+#new-recipe-page ul {
+  list-style: none;
+}
+
+#my-recipes-page ul {
+  padding-left: 0px;
+}
+
+#my-recipes-page li, #search-results li {
+  list-style: none;
+  margin: 20px auto;
+  background-color: #FFA07A;
+  padding: 5px 5px 10px 10px;
+  border-left: 10px #F44336 solid;
+  transition: border-left 0.25s linear;
+}
+#my-recipes-page li span {
+/*   margin-right: 20px; */
+}
+
+#search-results li {
+  padding-bottom: 0;
+}
+
+#my-recipes-page li:hover, #search-results li:hover {
+  border-left: 30px #F44336 solid;
+  transition: border-left 0.25s linear;
+  cursor: pointer;
+}
+
+#my-recipes-page h2 {
+  margin: 10px auto;
+}
+
+#my-recipes-page ul {
+  width: 55%;
+}
+
+.my-recipe-list-item span {
+  font-size: 18px;
+  display: inline-block;
+  width: 10%;
+}
+
+.edit-recipe {
+  display: none;
+}
+
+#single-recipe-page ul, #single-recipe-page ol {
+  padding-left: 0;
+}
+
+#single-recipe-page input[type="checkbox"] {
+  margin-right: 10px;
+  position: relative;
+  bottom: -2px;
+}
+
+#single-recipe-page ol li {
+  margin-left: 20px;
+}
+
+
+#new-recipe-page .create-list {
+  padding-left: 0;
+}
+
+#new-recipe-page form {
+  margin: 0 auto;
+}
+
+#new-recipe-page label {
+  margin: 0 auto;
+}
+
+#new-recipe-page label input {
+  margin: 0 auto;
+  vertical-align: center;
+}
+
+#new-recipe-page p {
+  display: inline;
+  margin-left: 5px;
+  font-size: 20px;
+  position: relative;
+  top: 3px;
+}
+
+
+#recipe-title {
+  width: 60%;
+}
+
+#ready-in-mins {
+  width: 40px;
+  text-align: right;
+}
+
+#new-recipe-page ol li input{
+  width: 65%;
+}
+
+.ingredient-amount {
+  width: 8%;
 }
 .hide {
   display: none;
 }
 
-li:hover {
-  cursor: pointer;
+
+@media only screen and (max-width: 1300px) {
+  #search-results {
+    width: 90%;
+/*     font-size: 20px; */
+  }
+  #search-results p {
+    font-size: 25px;
+  }
+  
+  #side-bar {
+    top: 0;
+    border-left: 0;
+/*     background: 0; */
+    width: 20%;
+  }
+  
+  #side-bar li {
+/*     background: 0; */
+    margin: 0 0 5px 0;
+  }
+  #side-bar h2 {
+    font-size: 15px;
+    top: 5px;
+  }
+  .ingredient-amount {
+    width: 15%;
+  }
+  
+  #my-recipes-page li span {
+  margin-right: 20px;
+    width: 30px;
 }
+}
+
+@media only screen and (max-width: 800px) {
+  .ingredient-amount {
+    width: 50%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
