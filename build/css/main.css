@@ -1,0 +1,41 @@
+nav button {
+  float: right;
+  padding-bottom: 5px;
+}
+
+.home-page-center {
+  margin-top: 25px;
+	font-family: 'Merriweather', serif;
+}
+
+body {
+  background: url('../img/chicken-1.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.no-background {
+  background: none;
+  border: none;
+}
+
+.jumbotron h1 {
+  font-family: 'Kaushan Script', cursive;/*Google Font*/
+  font-size: 100px;
+}
+
+.color-blue {
+  color: #3abad1;
+}
+
+
+@media only screen and (max-width: 700px) {
+  .jumbotron h1 {
+    font-size: 80px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .jumbotron h1 {
+    font-size: 50px;
+  }
+}
