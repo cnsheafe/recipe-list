@@ -51,13 +51,13 @@ $(function main() {
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
     let query = $(this).find('#search-bar').val();
-    recipe.getSearchResults(query).done(function (data) {
+    recipe.getBetterSearchResults(query).done(function (data) {
       search.storeResults(data, appState);
       search_results.showSearchResults(appState);
     });
   });
 
-  $('#search-results').on('click','li',function() {
+  $('#search-results').on('click','li', function() {
     let xhr = recipe.getRecipeDetails($(this).data('recipeid'));
     xhr.done( function (data) {
       const $recipePage = $('#single-recipe-page');
