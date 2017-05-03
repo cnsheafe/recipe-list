@@ -1,0 +1,139 @@
+header h1 {
+	font-family: 'Kaushan Script', cursive;
+	font-size: 30px;
+	text-align: center;
+}
+html {
+	background-color: #f1c40f;
+}
+
+.background-reset {
+	background: 0;
+}
+main {
+	font-family: 'Merriweather', serif;
+}
+/* Color schemes */
+.color-blue {
+	color: #0b73b2;
+}
+
+/* page-tab styling */
+.page-tabs {
+	text-align: center;
+	font-family: 'Merriweather', serif;
+	color: #0b73b2;
+}
+
+/* page styling */
+.page h2 {
+	text-align: center;
+	font-size: 20px;
+}
+.page {
+	margin-bottom: 100px;
+}
+
+/* searchbar formatting */
+#search-form h2 {
+	text-align: center;
+}
+
+#search-results, #search-form {
+	width: 90%;
+	margin: 0 auto;
+}
+
+#search-results li {
+	padding-left: 0;
+	border-radius: 5px;
+	background-color: #EF5350;
+	color: #f1c40f;
+}
+
+#search-form label {
+	width: 100%;
+}
+
+.create-header-fields {
+	text-align: center;
+	margin: 0 auto 15px;
+}
+.create-header-fields input:nth-child(1) {
+	width: 60%;
+	display: inline;
+}
+
+.create-header-fields input:nth-child(2) {
+	width: 65px;
+	display: inline;
+	text-align: center;
+}
+
+.create-header-fields span {
+	vertical-align: bottom;
+}
+ul.create-list h2 {
+	text-align: center;
+}
+
+ul.no-bullets {
+	list-style: none;
+	padding-left: 0;
+	margin: 0 10px auto;
+}
+ul.no-bullets li {
+	margin: 0 auto;
+	width: 80%;
+}
+ul#ingredients li {
+	margin-bottom: 5px;
+}
+li.ingredient input:nth-child(1) {
+	width: 70%;
+	margin-right: 5px;
+}
+li.ingredient input:nth-child(2) {
+	width: 25%;
+}
+.directions {
+	width: 80%;
+	margin: 0 auto;
+	margin-bottom: 15px;
+}
+
+ol.create-list {
+	margin: 0 10px auto;
+	padding-left: 0;
+}
+
+ol.create-list li {
+	margin: 0 auto;
+}
+
+ol#steps li {
+	margin-bottom: 5px;
+}
+
+ol.create-list input {
+	top: -5px;
+}
+
+#new-recipe-page button {
+	float: right;
+	margin: 10px;
+}
+img {
+  width: 100px;
+}
+a {
+  display: inline-block;
+}
+
+.edit-recipe {
+  display: none;
+}
+
+.hidden {
+	display: none;
+}
