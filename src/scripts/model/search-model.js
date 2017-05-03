@@ -1,16 +1,11 @@
 // jshint esversion:6
-export function storeResults(resultObj, state) {
-  let recipeId = '';
-  state.resultList = [];
-  $.each(resultObj.Recipes, function(ind, obj) {
-    recipeId = obj.link.split('-').pop();
-
-    state.resultList.push({
-      title: obj.name,
-      imgUrl: obj.image,
-      id: recipeId
-    });
+export function storeResults(apiResult, state) {
+  state.resultList = apiResult.results;
+  state.sessionResults.push({
+    currentQuery: state.currentQuery,
+    baseUri: apiResult.baseUri
   });
+  state.baseImgUri = apiResult.baseUri;
 }
 
 export function simplifyRecipe(recipeObj) {
