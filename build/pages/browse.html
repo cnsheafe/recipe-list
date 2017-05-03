@@ -1,87 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
-  <link rel="stylesheet" href="../../src/styles/normalize.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vollkorn">
-  <link rel="stylesheet" href="../../src/styles/main.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		crossorigin="anonymous">
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Kaushan+Script|Merriweather:300" >
+  <link rel="stylesheet"
+		href="styles/main.css">
   <script
     src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous" defer>
   </script>
-  <script src="../js/app.min.js" defer></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous" defer>
+	</script>
+  <script
+		src="../js/app.min.js" defer>
+	</script>
   <title>Spoon 'N Drop</title>
 </head>
 
-<header>
-  <h1>Spoon 'N Drop</h1>
-</header>
+<body class="background-reset color-blue">
+	<header class="">
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+			<ul class="nav nav-tabs">
+				<li id='login' class="page-tabs"><a>Login</a></li>
+				<li id="search-for-recipes" class="active page-tabs"><a>Search</a></li>
+				<li id="create-recipe" class="page-tabs"><a>Create</a></li>
+				<li id="my-recipes" class="page-tabs"><a>My Recipes</a></li>
+			</ul>
+		 </nav>
+		<h1 class="color-blue">Spoon 'N Drop</h1>
+	</header>
 
-<body>
-  <aside id="side-bar">
-    <ul>
-      <li id='login'><h2>Dropbox Login</h2></li>
-      <li id="search-for-recipes"><h2>Search</h2></li>
-      <li id="create-recipe"><h2>Create</h2></li>
-      <li id="my-recipes"><h2>My Recipes</h2></li>
-    </ul>
-  </aside>
+
+
 
   <main>
 
-    <div id="search-page" class="page">
+    <div id="search-page" class="container page">
       <h2>Search for a Recipe</h2>
       <form id="search-form">
-        <label>
-          <input type="text" id="search-bar" placeholder="Search for recipes">
-          <button type="submit">Search</button>
-        </label>
+				<div class="form-group">
+					<label>
+						<input type="text" id="search-bar" class="form-control" placeholder="Search for recipes">
+						<!--	<button type="submit" class="btn btn-default">Search</button> -->
+					</label>
+				</div>
       </form>
-      <ul id="search-results">
+      <ul id="search-results" class="nav nav-stacked">
         <!-- Jquery will generated listed items. Each list item will have data attribute "recipeId" attached. -->
       </ul>
     </div>
 
-    <div id="my-recipes-page" class="hide page">
-      <h1>My Recipes</h1>
+    <div id="my-recipes-page" class="hide container page">
+      <h2>My Recipes</h2>
       <ul>
 
       </ul>
     </div>
 
-    <div id="single-recipe-page" class="hide page">
+    <div id="single-recipe-page" class="hide container page">
       <div class="recipe-container">
 
       </div>
       <button type="button" id="add-to-my-recipes">Add</button>
     </div>
 
-    <div id="new-recipe-page" class="hide page">
+    <div id="new-recipe-page" class="hide container page">
       <h2>Create a Recipe</h2>
       <form action="#">
-        <label>
-          <input type="text" id="recipe-title" placeholder="Recipe Title">
-          <input type="text" id="ready-in-mins" placeholder="5">
-          <p>Mins</p>
-        </label>
+				<div class="form-group create-header-fields">
+					<input type="text" id="recipe-title" class="form-control" placeholder="Recipe Title">
+					<input type="number" id="ready-in-mins" class="form-control" placeholder="5">
+					<span>Mins</span>
+				</div>
 
-        <ul id="ingredients" class="create-list">
-          <h2>Ingredients</h2>
-          <li class="ingredient">
-            <input type="text" class="ingredient-name" placeholder="ingredient">
-            <input type="text" class="ingredient-amount" placeholder="amount">
-          </li>
-        </ul>
-        <ol id="steps" class="create-list">
-          <h2>Steps</h2>
-          <li><input type="text" placeholder="First step"></li>
-        </ol>
-        <button type="button">Submit</button>
+				<h2>Ingredients</h2>
+				<div class="form-group">
+					<ul id="ingredients" class="create-list no-bullets">
+						<li class="ingredient input-group">
+							<input type="text" class="ingredient-name form-control" placeholder="ingredient">
+							<input type="text" class="ingredient-amount form-control" placeholder="amount">
+						</li>
+					</ul>
+				</div>
+
+				<h2>Steps</h2>
+				<div class="form-group directions">
+					<ol id="steps" class="create-list center-block input-group">
+						<li><input type="text" class="form-control" placeholder="First step"></li>
+					</ol>
+					<button type="button" class="btn">Submit</button>
+				</div>
       </form>
 
     </div>
