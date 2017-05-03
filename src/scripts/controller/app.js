@@ -15,6 +15,8 @@ const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build/';
 
 function initAppState() {
   return {
+    sessionResults: [],
+    currentQuery: '',
     resultList: [],
     myRecipes: [], //list of recipe objs
     loggedIn: false,
@@ -51,7 +53,7 @@ $(function main() {
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
     let query = $(this).find('#search-bar').val();
-    recipe.getBetterSearchResults(query).done(function (data) {
+    recipe.getSearchResults(query).done(function (data) {
       search.storeResults(data, appState);
       search_results.showSearchResults(appState);
     });
