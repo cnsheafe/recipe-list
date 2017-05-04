@@ -9,7 +9,7 @@ import * as create from '../view/create';
 import * as search from '../model/search-model';
 import * as my_recipes from '../view/my-recipes';
 import * as render from '../view/render-generic';
-import * as search_results from '../view/search-results';
+import {showSearchResults} from '../view/search-results';
 
 const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build/';
 
@@ -55,7 +55,7 @@ $(function main() {
     let query = $(this).find('#search-bar').val();
     recipe.getSearchResults(query).done(function (data) {
       search.storeResults(data, appState);
-      search_results.showSearchResults(appState);
+      showSearchResults(appState);
     });
   });
 
