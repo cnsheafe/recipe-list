@@ -49,6 +49,22 @@ main {
 	border-radius: 5px;
 	background-color: #EF5350;
 	color: #f1c40f;
+	margin-left: 0;
+}
+
+#search-results li > .col-xs-4 {
+	padding-left: 0;
+	padding-right: 0;
+}
+.result-preview {
+	display: inline-block;
+	margin-top: 10px;
+	vertical-align: top;
+}
+
+.result-preview > h3 {
+	font-size: 15px;
+	margin-top: 0;
 }
 
 #search-form label {
@@ -123,9 +139,7 @@ ol.create-list input {
 	float: right;
 	margin: 10px;
 }
-img {
-  width: 100px;
-}
+
 a {
   display: inline-block;
 }
