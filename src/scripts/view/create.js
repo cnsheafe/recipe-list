@@ -28,13 +28,24 @@ export function addRecipe() {
 export function newListItem($element, keyPressed) {
   if(keyPressed === 'Enter') {
     if ($element.hasClass('ingredient')) {
-    $element.after('<li class="ingredient">'+
-    '<input type="text" class="ingredient-name" placeholder="new item">'+
-    '<input type="text" class="ingredient-amount" placeholder="amount">'+
-    '</li>');
+    $element.after(`
+      <li class="ingredient input-group">
+        <span class="col-xs-8 col-xs-offset-1">
+				  <input type="text" class="ingredient-name form-control" placeholder="ingredient">
+        </span>
+        <span class="col-xs-3">
+			     <input type="text" class="ingredient-amount form-control" placeholder="">
+        <span>Amount</span>
+        </span>
+			</li>
+  `);
     }
     else {
-      $element.after('<li><input type="text" placeholder="new step"></li>');
+      $element.after(
+        `<li class="col-xs-12">
+            <input type="text" class="form-control" placeholder="First step">
+          </li>`
+      );
     }
   }
 }
