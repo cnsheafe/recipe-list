@@ -81,26 +81,37 @@
     <div id="new-recipe-page" class="hide container page">
       <h2>Create a Recipe</h2>
       <form action="#">
-				<div class="form-group create-header-fields">
-					<input type="text" id="recipe-title" class="form-control" placeholder="Recipe Title">
-					<input type="number" id="ready-in-mins" class="form-control" placeholder="5">
-					<span>Mins</span>
+				<div class="form-group create-header-fields row">
+            <span class="col-xs-8 col-xs-offset-1">
+              <input type="text" id="recipe-title" class="form-control" placeholder="Recipe Title">
+            </span>
+  					<span class="col-xs-3">
+		  			  <input type="number" id="ready-in-mins" class="form-control" placeholder="5">
+				      <span>Mins</span>
+            </span>
 				</div>
 
 				<h2>Ingredients</h2>
-				<div class="form-group">
+				<div class="form-group row">
 					<ul id="ingredients" class="create-list no-bullets">
 						<li class="ingredient input-group">
-							<input type="text" class="ingredient-name form-control" placeholder="ingredient">
-							<input type="text" class="ingredient-amount form-control" placeholder="amount">
+              <span class="col-xs-8 col-xs-offset-1">
+							  <input type="text" class="ingredient-name form-control" placeholder="ingredient">
+              </span>
+              <span class="col-xs-3">
+							  <input type="text" class="ingredient-amount form-control" placeholder="">
+                <span>Amount</span>
+              </span>
 						</li>
 					</ul>
 				</div>
 
 				<h2>Steps</h2>
-				<div class="form-group directions">
-					<ol id="steps" class="create-list center-block input-group">
-						<li><input type="text" class="form-control" placeholder="First step"></li>
+				<div class="form-group row">
+					<ol id="steps" class="create-list list-group col-xs-offset-1">
+						<li class="col-xs-12">
+              <input type="text" class="form-control" placeholder="First step">
+            </li>
 					</ol>
 					<button type="button" class="btn">Submit</button>
 				</div>
