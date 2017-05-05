@@ -66,8 +66,7 @@ $(function main() {
       render.switchView($recipePage);
       $('#add-to-my-recipes').removeClass('hide');
       appState.currentRecipe = search.simplifyRecipe(data);
-      render.showRecipe($recipePage.find('.recipe-container'), appState.currentRecipe
-      );
+      render.showRecipe($recipePage.find('.recipe-container'), appState.currentRecipe);
     });
   });
 
