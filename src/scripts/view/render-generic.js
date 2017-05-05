@@ -43,9 +43,16 @@ export function showRecipe($selector, recipe) {
 }
 
 export function switchView($pageView) {
-  $('#new-recipe-page').addClass('hide');
   $('#search-page').addClass('hide');
+  $('#new-recipe-page').addClass('hide');
   $('#my-recipes-page').addClass('hide');
   $('#single-recipe-page').addClass('hide');
   $pageView.removeClass('hide');
+}
+
+export function switchActiveTab($tab) {
+  $('#search-for-recipes').removeClass('active');
+  $('#create-recipe').removeClass('active');
+  $('#my-recipes').removeClass('active');
+  $tab.addClass('active');
 }
