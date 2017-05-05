@@ -10,9 +10,9 @@ import * as search from '../model/search-model';
 import * as my_recipes from '../view/my-recipes';
 import * as render from '../view/render-generic';
 import {showSearchResults} from '../view/search-results';
-
-const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build/';
-
+import {LOCAL_URL} from '../.config';
+const REDIRECT_URI = LOCAL_URL || 'https://cnsheafe.github.io/spoon-n-drop/build/';
+console.log(REDIRECT_URI);
 function initAppState() {
   return {
     sessionResults: [],
@@ -30,7 +30,7 @@ function userHasAccessToken(token) {
     let redirectResponse = window.location.href.split('#')[1];
     if(typeof redirectResponse != 'undefined') {
       window.sessionStorage.setItem('accessToken', redirectResponse.split('&')[0].split('=')[1]);
-      window.location.replace(REDIRECT_URI);
+      window.location.href(REDIRECT_URI);
       return true;
     }
     else {return false;}
@@ -48,7 +48,10 @@ $(function main() {
 
   $('#login').on('click', () => { if(!appState.loggedIn) {dropbox.OAuth();} });
 
-  $('#search-for-recipes').on('click', () => render.switchView($('#search-page')));
+  $('#search-for-recipes').on('click',function() {
+    render.switchView($('#search-page'));
+    render.switchActiveTab($(this));
+  });
 
   $('#search-form').on('submit', function(event) {
     event.preventDefault();
@@ -70,9 +73,10 @@ $(function main() {
     });
   });
 
-  $('#create-recipe').on('click', () => {
+  $('#create-recipe').on('click', function () {
     render.switchView($('#new-recipe-page'));
     $('#add-to-my-recipes').removeClass('hide');
+    render.switchActiveTab($(this));
   });
 
   $('#my-recipes').on('click', function () {
@@ -82,6 +86,7 @@ $(function main() {
           appState.myRecipes = data;
           console.log(appState.myRecipes);
           render.switchView($('#my-recipes-page'));
+          render.switchActiveTab($(this));
           my_recipes.showList(appState);
         },
         jqxhr => console.log(jqxhr.responseText)
