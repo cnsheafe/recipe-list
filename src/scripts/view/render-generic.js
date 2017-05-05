@@ -2,19 +2,42 @@
 // Is used on more than one 'page'
 export function showRecipe($selector, recipe) {
   console.log(recipe);
-  let recipeInfo ='<span><h1>'+
-    recipe.title+'</h1>'+
-    '<h2>'+recipe.readyInMinutes+' minutes</h2></span>'+
-    '<h3>Ingredients</h3><ul>';
-  $.each(recipe.listofIngredients, function(ind, obj) {
-    recipeInfo += '<li><input type="checkbox">'+obj.amount+
-    ' '+obj.name+'</li>';
+  let recipeInfo =
+    `<div class="recipe-header row">
+      <div class="col-xs-8 col-xs-offset-2">
+        <h2>${recipe.title}</h2>
+        <span class="glyphicon glyphicon-time"></span>
+        <span>${recipe.readyInMinutes}</span>
+      </div>
+    </div>
+    <div class="row">
+      <h3 class="col-xs-8 col-xs-offset-2">Ingredients</h3>
+      <ul class="col-xs-8 col-xs-offset-2 input-group list-group">`;
+
+  $.each(recipe.listofIngredients, function(ind, ingredient) {
+    recipeInfo +=
+      `<li class="list-group-item row">
+        <input type="checkbox" class="col-xs-1">
+        <span class="col-xs-10">
+          ${ingredient.amount} ${ingredient.name}
+        </span>
+      </li>`;
   });
-  recipeInfo += '</ul><h3>Directions</h3><ol>';
+  recipeInfo +=
+    `</ul></div>
+    <div class="row">
+      <h3 class="col-xs-8 col-xs-offset-2">Directions</h3>
+      <ol class="col-xs-8 col-xs-offset-2 input-group list-group">`;
   $.each(recipe.instructions, function(ind,val) {
-    recipeInfo += '<li>'+val+'</li>';
+    recipeInfo +=
+    `<li class="list-group-item row">
+      <input type="checkbox" class="col-xs-1">
+      <span class="col-xs-10">
+        ${val}
+      </span>
+    </li>`;
   });
-  recipeInfo += '</ol>';
+  recipeInfo += '</ol></div>';
 
   $selector.html(recipeInfo);
 }
