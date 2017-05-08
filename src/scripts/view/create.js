@@ -38,7 +38,7 @@ export function newListItem($element, keyPressed) {
         <span>Amount</span>
         </span>
 			</li>
-  `);
+    `);
     }
     else {
       $element.after(
