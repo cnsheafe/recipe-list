@@ -46,6 +46,10 @@ $(function main() {
     $('#login').find('h2').text('Logged In');
   }
 
+  if(window.matchMedia("min-width: 768px")) {
+    $('header').children('nav').removeClass('navbar-fixed-bottom');
+    
+  }
   $('#login').on('click', () => { if(!appState.loggedIn) {dropbox.OAuth();} });
 
   $('#search-for-recipes').on('click',function() {
