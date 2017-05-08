@@ -133,6 +133,9 @@ $(function main() {
 
   $('.create-list').on('keypress', 'li', function (event) {
     create.newListItem($(this), event.key);
+    $(this).next().find('.ingredient-name').focus();
+    console.log($(this));
+    console.log($(this).next());
   });
 
   $('#single-recipe-page').on('click', '#add-to-my-recipes', function() {
