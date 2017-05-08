@@ -40,16 +40,34 @@ function userHasAccessToken(token) {
 $(function main() {
   let appState = initAppState();
   let token = window.sessionStorage.getItem('accessToken');
+  const $navbar = $('header').children('nav');
 
   if(userHasAccessToken(token)) {
     appState.loggedIn = true;
     $('#login').find('h2').text('Logged In');
   }
 
-  if(window.matchMedia("min-width: 768px")) {
-    $('header').children('nav').removeClass('navbar-fixed-bottom');
-    
+  if(window.matchMedia("(min-width: 768px)").matches) {
+    $navbar.removeClass('navbar-fixed-bottom');
+    $navbar.children('ul').removeClass('nav-tabs');
+    $navbar.children('ul').addClass('nav-stacked nav-pills');
   }
+  if(matchMedia) {
+    let mqSmall = window.matchMedia('(max-width: 768px)');
+    mqSmall.addListener(mqSmall => {
+      if(mqSmall.matches) {
+        $navbar.addClass('navbar-fixed-bottom');
+        $navbar.children('ul').removeClass('nav-stacked nav-pills');
+        $navbar.children('ul').addClass('nav-tabs');
+      }
+      else {
+        $navbar.removeClass('navbar-fixed-bottom');
+        $navbar.children('ul').addClass('nav-stacked nav-pills');
+        $navbar.children('ul').removeClass('nav-tabs');
+      }
+    });
+  }
+
   $('#login').on('click', () => { if(!appState.loggedIn) {dropbox.OAuth();} });
 
   $('#search-for-recipes').on('click',function() {
