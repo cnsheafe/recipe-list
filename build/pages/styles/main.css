@@ -19,10 +19,21 @@ main {
 }
 
 /* page-tab styling [PAGE-TABS]*/
-.page-tabs {
+header ul.nav-tabs {
+	text-align: center;
+}
+
+li.page-tabs {
 	text-align: center;
 	font-family: 'Merriweather', serif;
 	color: #0b73b2;
+	display: inline;
+	float: none;
+
+}
+
+li.page-tabs a {
+	display: inline-block;
 }
 
 /* page styling [PAGE]*/
