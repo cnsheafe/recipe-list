@@ -16,13 +16,12 @@
         src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" defer>
     </script>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Merriweather:300" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css?family=Merriweather:300" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css"/>
   </head>
   <header>
     <div class="container-fluid">
       <nav class="navbar navbar-default navbar-fixed-top no-background">
-        <button type="button" class="btn btn-default">Login with Dropbox</button>
       </nav>
     </div>
     <div class="jumbotron color-blue no-background">
@@ -31,9 +30,12 @@
   </header>
   <body>
     <div class="container home-page-center">
-      <form class="row" method="get" action="pages/browse.html">
+      <div class="jumbotron greetings">
+        <h2>A recipe app for finding, creating, and managing recipes.</h2>
+      </div>
+      <form class="" method="get" action="pages/index.html">
         <div class="form-group">
-          <input type="text" id="search-form" class="form-control" placeholder="Search for a recipe">
+          <button type="submit" class="btn btn-primary">Go to App</button>
         </div>
       </form>
     </div>
