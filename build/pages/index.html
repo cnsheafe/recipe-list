@@ -37,7 +37,7 @@
 		<h1 class="color-blue">Spoon 'N Drop</h1>
 		<nav class="navbar navbar-default navbar-fixed-bottom">
 			<ul class="nav nav-tabs">
-				<li id='login' class="page-tabs"><a>Login</a></li>
+				<li id="login-tab" class="page-tabs" data-toggle="modal" data-target="#demo-modal"><a>Login</a></li>
 				<li id="search-for-recipes" class="active page-tabs"><a>Search</a></li>
 				<li id="create-recipe" class="page-tabs"><a>Create</a></li>
 				<li id="my-recipes" class="page-tabs"><a>My Recipes</a></li>
@@ -120,4 +120,26 @@
 </body>
 </div>
 
+<div class="modal" id="demo-modal" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h3 class="modal-title" id="demoModalLabel">Login</h3>
+      </div>
+      <div class="modal-body">
+        <p>
+        To access the "create" and "my recipes" features of the app a Dropbox account is required.
+        If you wish to use a Demo account, provide the following credentials in the Dropbox login.
+      </p>
+      <p>email: user.demo@yahoo.com</p>
+      <p>pwd: thinkful</p>
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+      <button type="button" id="login" class="btn btn-primary" name="redirect">Log in with Dropbox</button>
+    </div>
+  </div>
+
+</div>
 </html>
