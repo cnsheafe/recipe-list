@@ -44,7 +44,7 @@ $(function main() {
 
   if(userHasAccessToken(token)) {
     appState.loggedIn = true;
-    $('#login').find('h2').text('Logged In');
+    $('#login-tab').find('a').text('Logged In');
   }
 
   if(window.matchMedia("(min-width: 768px)").matches) {
