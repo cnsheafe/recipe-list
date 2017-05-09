@@ -39,8 +39,8 @@
 			<ul class="nav nav-tabs">
 				<li id="login-tab" class="page-tabs" data-toggle="modal" data-target="#demo-modal"><a>Login</a></li>
 				<li id="search-for-recipes" class="active page-tabs"><a>Search</a></li>
-				<li id="create-recipe" class="page-tabs"><a>Create</a></li>
-				<li id="my-recipes" class="page-tabs"><a>My Recipes</a></li>
+				<li id="create-recipe" class="page-tabs hide"><a>Create</a></li>
+				<li id="my-recipes" class="page-tabs hide"><a>My Recipes</a></li>
 			</ul>
 		 </nav>
 	</header>
@@ -63,7 +63,7 @@
 
     <div id="my-recipes-page" class="hide page">
       <h2>My Recipes</h2>
-      <ul>
+      <ul class="list-group">
 
       </ul>
     </div>
@@ -135,7 +135,7 @@
       <p>pwd: thinkful</p>
       </div>
     </div>
-    
+
     <div class="modal-footer">
       <button type="button" id="login" class="btn btn-primary" name="redirect">Log in with Dropbox</button>
     </div>
