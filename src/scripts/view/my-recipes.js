@@ -5,11 +5,11 @@ export function showList(state) {
   let html = '';
 
   $.each(state.myRecipes, function(index, recipeObj) {
-    html += '<li class="my-recipe-list-item">' +
-    '<h2>'+recipeObj.title+'</h2>'+
-    '<div>' +'<span>'+recipeObj.readyInMinutes+' mins</span>'+
-    '<button class="edit-recipe">Edit</button>'+
-    '<button class="delete-recipe">Delete</button></li>';
+    html += '<li class="list-group-item my-recipe-list-item">' +
+    '<h3>'+recipeObj.title+'</h3>'+
+    '<div>' +'<span>'+'<span class="glyphicon-time glyphicon"></span>'+recipeObj.readyInMinutes+'</span>'+
+    '<button class="edit-recipe btn btn-default">Edit</button>'+
+    '<button class="delete-recipe btn btn-default">Delete</button></li>';
   });
   $myRecipes.find('ul').html(html);
 
