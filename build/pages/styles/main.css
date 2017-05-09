@@ -1,6 +1,6 @@
 header h1 {
 	font-family: 'Kaushan Script', cursive;
-	font-size: 30px;
+	font-size: 35px;
 	text-align: center;
 }
 html {
@@ -143,6 +143,18 @@ ol.create-list input {
 	padding-left: 0;
 }
 
+#my-recipes-page ul {
+	list-style: none;
+}
+
+.my-recipe-list-item h3 {
+	font-size: 16px;
+}
+
+.my-recipe-list-item .delete-recipe {
+  margin-left: 5px;
+}
+
 a {
   display: inline-block;
 }
@@ -153,4 +165,14 @@ a {
 
 .hidden {
 	display: none;
+}
+
+@media (min-width: 768px) {
+	main {
+		margin-top: 30px;
+	}
+	header h1 {
+		font-size: 40px;
+		margin-bottom: 20px;
+	}
 }
