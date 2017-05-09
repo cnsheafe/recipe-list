@@ -30,7 +30,7 @@ function userHasAccessToken(token) {
     let redirectResponse = window.location.href.split('#')[1];
     if(typeof redirectResponse != 'undefined') {
       window.sessionStorage.setItem('accessToken', redirectResponse.split('&')[0].split('=')[1]);
-      window.location.href(REDIRECT_URI);
+      window.location.replace(REDIRECT_URI);
       return true;
     }
     else {return false;}
@@ -45,6 +45,8 @@ $(function main() {
   if(userHasAccessToken(token)) {
     appState.loggedIn = true;
     $('#login-tab').find('a').text('Logged In');
+    $('#create-recipe').removeClass('hide');
+    $('#my-recipes').removeClass('hide');
   }
 
   if(window.matchMedia("(min-width: 768px)").matches) {
