@@ -29,7 +29,7 @@ li.page-tabs {
 	color: #0b73b2;
 	display: inline;
 	float: none;
-
+  cursor: pointer;
 }
 
 li.page-tabs a {
