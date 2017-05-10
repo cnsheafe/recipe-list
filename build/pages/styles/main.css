@@ -49,7 +49,10 @@ li.page-tabs a {
 #search-form h2 {
 	text-align: center;
 }
-
+#search-form button {
+	float: right;
+	margin-top: 5px;
+}
 #search-results, #search-form {
 	width: 90%;
 	margin: 0 auto;
