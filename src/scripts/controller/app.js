@@ -10,8 +10,8 @@ import * as search from '../model/search-model';
 import * as my_recipes from '../view/my-recipes';
 import * as render from '../view/render-generic';
 import {showSearchResults} from '../view/search-results';
-import {LOCAL_URL} from '../.config';
-const REDIRECT_URI = LOCAL_URL || 'https://cnsheafe.github.io/spoon-n-drop/build/pages/';
+// import {LOCAL_URL} from '../.config';
+const REDIRECT_URI = 'https://cnsheafe.github.io/spoon-n-drop/build/pages/';
 console.log(REDIRECT_URI);
 function initAppState() {
   return {
