@@ -2,7 +2,7 @@
 // See Dropbox APi v2 HTTP documentation
 const CLIENT_ID = 'myj4y8uy5mlsg9s';
 import {LOCAL_URL} from '../../.config';
-const REDIRECT_URI = LOCAL_URL || 'https://cnsheafe.github.io/spoon-n-drop/build/';
+const REDIRECT_URI = LOCAL_URL || 'https://cnsheafe.github.io/spoon-n-drop/build/pages/';
 const STORAGE_PATH = '/my-recipes.json';
 
 export function OAuth(){
